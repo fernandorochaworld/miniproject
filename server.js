@@ -1,6 +1,7 @@
 const express = require("express"); // We import the express application
 const cors = require("cors"); // Necessary for localhost
 const app = express(); // Creates an express application in app
+const morgan = require("morgan");
 
 /**
  * Initial application setup
@@ -9,6 +10,13 @@ const app = express(); // Creates an express application in app
  */
 app.use(cors());
 app.use(express.json());
+
+morgan.token("req-body", (req) => JSON.stringify(req.body));
+app.use(
+  morgan(
+    ":method :url :status :res[content-length] - :response-time ms :req-body"
+  )
+);
 
 /**
  * DATA STORAGE
@@ -45,7 +53,7 @@ function currencyValidation(currency) {
   // Validate attributes
   Object.keys(currency).forEach((key) => {
     if (!(key === "conversionRate" && currency[key] === 0) && !currency[key]) {
-      throw new Error(`${key} is required.`);
+      throw new Error(`${key} is missing`);
     }
   });
 
@@ -83,7 +91,7 @@ app.get("/api/currency/:id", (request, response) => {
   if (currency) {
     response.status(200).json(currency);
   } else {
-    response.status(400).json({ error: "Currency not found." });
+    response.status(404).json({ error: "resource not found" });
   }
 });
 
@@ -106,7 +114,7 @@ app.post("/api/currency", (request, response) => {
 
   currency.id = ++currencyAutoIncrementId;
   currencies.push(currency);
-  return response.status(200).json(currency);
+  return response.status(200).json(currency).end();
 });
 
 /**
@@ -119,7 +127,7 @@ app.post("/api/currency", (request, response) => {
 app.put("/api/currency/:id/:newRate", (request, response) => {
   const currency = findCurrency(request.params.id);
   if (!currency) {
-    return response.status(400).json({ error: "Currency not found." });
+    return response.status(400).json({ error: "resource not found" });
   }
   currency.conversionRate = parseFloat(request.params.newRate) || 0;
   return response.status(200).json(currency);
@@ -133,13 +141,16 @@ app.put("/api/currency/:id/:newRate", (request, response) => {
 app.delete("/api/currency/:id", (request, response) => {
   const currency = findCurrency(request.params.id);
   if (!currency) {
-    return response.status(400).json({ error: "Currency not found." });
+    return response.status(400).json({ error: "resource not found" });
   }
 
-  currencies = currencies.filter(item => item.id !== currency.id)
-  return response.status(204);
+  currencies = currencies.filter((item) => item.id !== currency.id);
+  return response.status(204).end();
 });
 
+/**
+ * Fallback route
+ */
 app.all("*", (req, res) => {
   return res.status(404).json({ error: "unknown endpoint" }).end();
 });
