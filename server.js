@@ -32,7 +32,7 @@ app.get("/", (request, response) => {
 app.use("/api/currency", currencyRoutes);
 
 /**
- * Fallback route
+ * Fallback route (Completed)
  */
 app.all("*", (req, res) => {
   return res.status(404).json({ error: "unknown endpoint" }).end();
