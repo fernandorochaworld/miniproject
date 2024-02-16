@@ -34,3 +34,9 @@ Content-Type: application/json
     "country": "Brazil",
     "conversionRate": 3.68
 }
+
+### PUT Currency
+PUT http://localhost:3001/api/currency/2/0.9876
+
+
+

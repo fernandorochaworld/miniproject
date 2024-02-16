@@ -44,7 +44,7 @@ app.get("/", (request, response) => {
 });
 
 /**
- * TODO: GET Endpoint
+ * TODO: GET Endpoint (Completed)
  * @receives a get request to the URL: http://localhost:3001/api/currency/
  * @responds with returning the data as a JSON
  */
@@ -52,13 +52,17 @@ app.get("/api/currency/", (request, response) => {
   response.json(currencies);
 });
 
+function findCurrency(id) {
+  return currencies.find((item) => item.id == id)
+}
+
 /**
- * TODO: GET:id Endpoint
+ * TODO: GET:id Endpoint (Completed)
  * @receives a get request to the URL: http://localhost:3001/api/currency/:id
  * @responds with returning specific data as a JSON
  */
 app.get("/api/currency/:id", (request, response) => {
-  const currency = currencies.find((item) => item.id == request.params.id);
+  const currency = findCurrency(request.params.id);
   if (currency) {
     response.status(200).json(currency);
   } else {
@@ -112,7 +116,14 @@ app.post("/api/currency", (request, response) => {
  * Hint: updates the currency with the new conversion rate
  * @responds by returning the newly updated resource
  */
-app.put("...", (request, response) => {});
+app.put("/api/currency/:id/:newRate", (request, response) => {
+  const currency = findCurrency(request.params.id);
+  if (!currency) {
+    return response.status(400).json({ error: "Currency not found." });
+  }
+  currency.conversionRate = parseFloat(request.params.newRate) || 0;
+  return response.status(200).json(currency);
+});
 
 /**
  * TODO: DELETE:id Endpoint
