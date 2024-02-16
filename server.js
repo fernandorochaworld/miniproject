@@ -58,9 +58,8 @@ app.get('/api/currency/', (request, response) => {
  * @receives a get request to the URL: http://localhost:3001/api/currency/:id
  * @responds with returning specific data as a JSON
  */
-app.get('...', (request, response) => {
-
-
+app.get('/api/currency/:id', (request, response) => {
+  response.status(200).json(currencies.find( item => item.id == request.params.id));
 })
 
 /**
@@ -93,6 +92,11 @@ app.put('...', (request, response) => {
 app.post('...', (request, response) => {
 
 
+})
+
+        
+app.all('*', (req, res) => {
+  return res.status(404).json({message: 'unknown endpoint'}).end();
 })
 
 const PORT = 3001
