@@ -34,6 +34,24 @@ let currencies = [
   },
 ];
 
+function findCurrency(id) {
+  return currencies.find((item) => item.id == id);
+}
+
+function currencyValidation(currency) {
+  // Validate attributes
+  Object.keys(currency).forEach((key) => {
+    if (!(key === "conversionRate" && currency[key] === 0) && !currency[key]) {
+      throw new Error(`${key} is required.`);
+    }
+  });
+
+  // Validate existing record
+  if (currencies.find((item) => item.currencyCode === currency.currencyCode)) {
+    throw new Error("Currency already exists.");
+  }
+}
+
 /**
  * TESTING Endpoint (Completed)
  * @receives a get request to the URL: http://localhost:3001/
@@ -52,10 +70,6 @@ app.get("/api/currency/", (request, response) => {
   response.json(currencies);
 });
 
-function findCurrency(id) {
-  return currencies.find((item) => item.id == id)
-}
-
 /**
  * TODO: GET:id Endpoint (Completed)
  * @receives a get request to the URL: http://localhost:3001/api/currency/:id
@@ -70,25 +84,8 @@ app.get("/api/currency/:id", (request, response) => {
   }
 });
 
-function currencyValidation(currency) {
-  // Validate attributes
-  Object.keys(currency).forEach((key) => {
-    if (
-      !(key === "conversionRate" && currency[key] === 0) &&
-      !currency[key]
-    ) {
-      throw new Error(`${key} is required.`);
-    }
-  });
-
-  // Validate existing record
-  if (currencies.find((item) => item.currencyCode === currency.currencyCode)) {
-    throw new Error("Currency already exists.");
-  }
-}
-
 /**
- * TODO: POST Endpoint
+ * TODO: POST Endpoint (Completed)
  * @receives a post request to the URL: http://localhost:3001/api/currency,
  * with data object enclosed
  * @responds by returning the newly created resource
@@ -110,7 +107,7 @@ app.post("/api/currency", (request, response) => {
 });
 
 /**
- * TODO: PUT:id endpoint
+ * TODO: PUT:id endpoint (Completed)
  * @receives a put request to the URL: http://localhost:3001/api/currency/:id/:newRate
  * with data object enclosed
  * Hint: updates the currency with the new conversion rate
@@ -126,14 +123,22 @@ app.put("/api/currency/:id/:newRate", (request, response) => {
 });
 
 /**
- * TODO: DELETE:id Endpoint
+ * TODO: DELETE:id Endpoint (Completed)
  * @receives a delete request to the URL: http://localhost:3001/api/currency/:id,
  * @responds by returning a status code of 204
  */
-app.post("...", (request, response) => {});
+app.delete("/api/currency/:id", (request, response) => {
+  const currency = findCurrency(request.params.id);
+  if (!currency) {
+    return response.status(400).json({ error: "Currency not found." });
+  }
+
+  currencies = currencies.filter(item => item.id !== currency.id)
+  return response.status(204);
+});
 
 app.all("*", (req, res) => {
-  return res.status(404).json({ message: "unknown endpoint" }).end();
+  return res.status(404).json({ error: "unknown endpoint" }).end();
 });
 
 const PORT = 3001;
