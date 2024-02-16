@@ -62,9 +62,26 @@ app.get("/api/currency/:id", (request, response) => {
   if (currency) {
     response.status(200).json(currency);
   } else {
-    response.status(400).json({ message: "Currency not found." });
+    response.status(400).json({ error: "Currency not found." });
   }
 });
+
+function currencyValidation(currency) {
+  // Validate attributes
+  Object.keys(currency).forEach((key) => {
+    if (
+      !(key === "conversionRate" && currency[key] === 0) &&
+      !currency[key]
+    ) {
+      throw new Error(`${key} is required.`);
+    }
+  });
+
+  // Validate existing record
+  if (currencies.find((item) => item.currencyCode === currency.currencyCode)) {
+    throw new Error("Currency already exists.");
+  }
+}
 
 /**
  * TODO: POST Endpoint
@@ -76,19 +93,15 @@ app.post("/api/currency", (request, response) => {
   const { currencyCode, country, conversionRate } = request.body;
   const currency = { currencyCode, country, conversionRate };
 
-  Object.keys(currency).forEach((key) => {
-    console.log(key);
-    if (!currency[key]) {
-      return response
-        .status(400)
-        .json({ error: `${key} is required.` })
-        .end();
-    }
-  });
+  try {
+    currencyValidation(currency);
+  } catch (e) {
+    console.error(JSON.stringify(e));
+    return response.status(400).json({ error: e.message }).end();
+  }
 
   currency.id = currencies.length + 1;
   currencies.push(currency);
-  
   return response.status(200).json(currency);
 });
 
