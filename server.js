@@ -34,6 +34,9 @@ let currencies = [
   },
 ];
 
+// Auto incremented ID
+let currencyAutoIncrementId = 2;
+
 function findCurrency(id) {
   return currencies.find((item) => item.id == id);
 }
@@ -101,7 +104,7 @@ app.post("/api/currency", (request, response) => {
     return response.status(400).json({ error: e.message }).end();
   }
 
-  currency.id = currencies.length + 1;
+  currency.id = ++currencyAutoIncrementId;
   currencies.push(currency);
   return response.status(200).json(currency);
 });
