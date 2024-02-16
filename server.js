@@ -72,7 +72,25 @@ app.get("/api/currency/:id", (request, response) => {
  * with data object enclosed
  * @responds by returning the newly created resource
  */
-app.post("...", (request, response) => {});
+app.post("/api/currency", (request, response) => {
+  const { currencyCode, country, conversionRate } = request.body;
+  const currency = { currencyCode, country, conversionRate };
+
+  Object.keys(currency).forEach((key) => {
+    console.log(key);
+    if (!currency[key]) {
+      return response
+        .status(400)
+        .json({ error: `${key} is required.` })
+        .end();
+    }
+  });
+
+  currency.id = currencies.length + 1;
+  currencies.push(currency);
+  
+  return response.status(200).json(currency);
+});
 
 /**
  * TODO: PUT:id endpoint

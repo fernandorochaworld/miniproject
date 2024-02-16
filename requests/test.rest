@@ -16,3 +16,21 @@ GET http://localhost:3001/api/currency/3
 ### Not Found URL
 GET http://localhost:3001/api/not-found-url
 
+
+
+### Post Currency - Validation check
+POST http://localhost:3001/api/currency
+Content-Type: application/json
+
+{
+}
+
+### Post Currency
+POST http://localhost:3001/api/currency
+Content-Type: application/json
+
+{
+    "currencyCode": "BRL",
+    "country": "Brazil",
+    "conversionRate": 3.68
+}
