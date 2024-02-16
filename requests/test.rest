@@ -1,1 +1,15 @@
-GET http://localhost:3001/api/currency/
+### Application Root
+GET http://localhost:3001
+
+
+### Get List
+GET http://localhost:3001/api/currency
+
+
+### Get record
+GET http://localhost:3001/api/currency/2
+
+
+### Not Found URL
+GET http://localhost:3001/api/not-found-url
+
