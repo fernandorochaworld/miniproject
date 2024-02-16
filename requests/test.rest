@@ -9,6 +9,9 @@ GET http://localhost:3001/api/currency
 ### Get record
 GET http://localhost:3001/api/currency/2
 
+### Get record not found
+GET http://localhost:3001/api/currency/3
+
 
 ### Not Found URL
 GET http://localhost:3001/api/not-found-url
