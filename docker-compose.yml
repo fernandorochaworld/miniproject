@@ -1,7 +1,18 @@
 version: "3.8"
 services:
-  pgadmin:
+  db:
     container_name: pg
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: test_db
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    container_name: pgadmin
     image: dpage/pgadmin4
     restart: always
     environment:

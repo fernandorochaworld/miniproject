@@ -19,6 +19,13 @@ $ npm install
 $ npm run start
 ```
 
+
+## Start Docker Compose
+
+```bash
+$ docker-compose up -d
+```
+
 ## License
 
 Nest is [MIT licensed](LICENSE).
