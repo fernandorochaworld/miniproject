@@ -6,8 +6,8 @@ GET http://localhost:3001
 GET http://localhost:3001/api/currency
 
 
-### Get record
-GET http://localhost:3001/api/currency/1/countryName
+### Get records listing currencyCode and countryName
+GET http://localhost:3001/api/currency/countryName
 
 
 ### Get record
@@ -37,7 +37,7 @@ Content-Type: application/json
 
 {
     "currencyCode": "BRL",
-    "conversionRate": 0.9,
+    "conversionRate": 3.7,
     "countryId": 1
 }
 
