@@ -1,13 +1,35 @@
+import Login from "./Login";
+import CurrencyAdd from "./CurrencyAdd";
+import CurrencyConvert from "./CurrencyConvert";
+import CurrencyDelete from "./CurrencyDelete";
+import CurrencyUpdate from "./CurrencyUpdate";
+import CurrencyIndex from "./CurrencyIndex";
+import { useState } from "react";
 
 const App = () => {
+
+  const [currency, setCurrency] = useState();
+
+  function handleItemSelected(item) {
+    console.log('llll', item)
+    setCurrency(item);
+  }
+
   return (
-    <div>
-      <p> This is your starting parent component. Feel free to add additional components inside of the components directory. In addition, we provided utils & services directory for a reason. 
-        You can add additional functions to the utils that don't need to exist inside of the components. Furthermore, the services is there to make that connection
-        to your server endpoints!
-      </p>
-    </div>
-  )
+    <>
+      <Login />
+      <CurrencyIndex handleItemSelected={handleItemSelected} />
+      
+      {
+        currency &&
+        <div class="text-amber-600 text-center text-4xl font-bold mt-4">Selected Currency: {currency?.currencyCode} - {currency?.country?.name}</div>
+      }
+      <CurrencyAdd  />
+      <CurrencyConvert currency={currency} />
+      <CurrencyUpdate currency={currency} />
+      <CurrencyDelete currency={currency} />
+    </>
+  );
 }
 
-export default App
+export default App;
