@@ -82,7 +82,7 @@ router.delete("/:id", async (request, response) => {
     return response.status(400).json({ error: "resource not found" });
   }
 
-  country.destroy();
+  await country.destroy();
   return response.status(204).end();
 });
 

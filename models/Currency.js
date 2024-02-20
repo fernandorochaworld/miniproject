@@ -1,6 +1,6 @@
-const { DataTypes, Model } = require("sequelize");
+const { DataTypes, Model, Deferrable } = require("sequelize");
 const { sequelize } = require("../config/config");
-const Country = require("./models/Country");
+const Country = require("./Country");
 
 class Currency extends Model {}
 
@@ -15,6 +15,7 @@ Currency.init(
     currencyCode: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: true,
       },
@@ -23,6 +24,7 @@ Currency.init(
     countryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      unique: true,
       validate: {
         notEmpty: true,
       },
@@ -34,7 +36,7 @@ Currency.init(
       comment: "References to Country",
     },
     conversionRate: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false,
       validate: {
         notEmpty: true,

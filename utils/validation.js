@@ -7,11 +7,6 @@
         throw new Error(`${key} is missing`);
       }
     });
-  
-    // Validate existing record
-    if (currencies.find((item) => item.currencyCode === currency.currencyCode)) {
-      throw new Error("Currency already exists.");
-    }
   }
 
 

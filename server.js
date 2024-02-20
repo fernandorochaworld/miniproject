@@ -3,8 +3,7 @@ require("dotenv").config(); // Necessary for localhost
 const cors = require("cors"); // Necessary for localhost
 const app = express(); // Creates an express application in app
 const morgan = require("morgan");
-const currencyRoutes = require("./routes/currencies-routes");
-const countryRoutes = require("./routes/countries-routes");
+const routes = require("./routes/routes");
 
 /**
  * Initial application setup
@@ -21,29 +20,12 @@ app.use(
   )
 );
 
-/**
- * TESTING Endpoint (Completed)
- * @receives a get request to the URL: http://localhost:3001/
- * @responds with the string 'Hello World!'
- */
-app.get("/", (request, response) => {
-  response.send("Hello World!");
-});
-
-app.use("/api/currency", currencyRoutes);
-app.use("/api/country", countryRoutes);
-
-/**
- * Fallback route (Completed)
- */
-app.all("*", (req, res) => {
-  return res.status(404).json({ error: "unknown endpoint" }).end();
-});
+app.use("/", routes);
 
 try {
   const { sequelize } = require("./config/config");
 
-  sequelize.sync({ alter: true }).then((req) => {
+  sequelize.sync({ force: true }).then((req) => {
     app.listen(process.env.SERVER_PORT, () => {
       console.log(`Server running on port: ${process.env.SERVER_PORT}`);
     });
