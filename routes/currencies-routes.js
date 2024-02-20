@@ -10,7 +10,7 @@ const router = express.Router();
  * @responds with returning the data as a JSON
  */
 router.get("/", async (request, response) => {
-  const currencies = await Currency.findAll();
+  const currencies = await Currency.findAll({include: 'country'});
   response.json(currencies);
 });
 
@@ -20,7 +20,7 @@ router.get("/", async (request, response) => {
  * @responds with returning specific data as a JSON
  */
 router.get("/:id", async (request, response) => {
-  const currency = await Currency.findByPk(request.params.id);
+  const currency = await Currency.findByPk(request.params.id, {include: 'country'});
   if (currency) {
     response.status(200).json(currency);
   } else {

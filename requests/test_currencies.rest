@@ -7,7 +7,7 @@ GET http://localhost:3001/api/currency
 
 
 ### Get record
-GET http://localhost:3001/api/currency/2
+GET http://localhost:3001/api/currency/1
 
 ### Get record not found
 GET http://localhost:3001/api/currency/3
@@ -32,7 +32,7 @@ Content-Type: application/json
 {
     "currencyCode": "BRL",
     "conversionRate": 0.9,
-    "countryId": 2
+    "countryId": 1
 }
 
 ### PUT Currency

@@ -52,4 +52,7 @@ Currency.init(
   }
 );
 
+Currency.belongsTo(Country, { as: 'country', foreignKey: 'countryId' });
+Country.hasOne(Currency, { as: 'currency', foreignKey: 'countryId' });
+
 module.exports = Currency;

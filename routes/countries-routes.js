@@ -8,8 +8,8 @@ const router = express.Router();
  * @responds with returning the data as a JSON
  */
 router.get("/", async (request, response) => {
-  const notes = await Country.findAll();
-  response.json(notes);
+  const countries = await Country.findAll({include: 'currency'});
+  response.json(countries);
 });
 
 /**
@@ -18,7 +18,7 @@ router.get("/", async (request, response) => {
  * @responds with returning specific data as a JSON
  */
 router.get("/:id", async (request, response) => {
-  const country = await Country.findByPk(request.params.id);
+  const country = await Country.findByPk(request.params.id, {include: 'currency'});
   if (country) {
     response.status(200).json(country);
   } else {

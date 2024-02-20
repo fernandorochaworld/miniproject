@@ -7,7 +7,7 @@ GET http://localhost:3001/api/country
 
 
 ### Get record
-GET http://localhost:3001/api/country/2
+GET http://localhost:3001/api/country/1
 
 ### Get record not found
 GET http://localhost:3001/api/country/9
@@ -25,7 +25,7 @@ POST http://localhost:3001/api/country
 Content-Type: application/json
 
 {
-    "name": "USA"
+    "name": "Brazil"
 }
 
 ### PUT country
