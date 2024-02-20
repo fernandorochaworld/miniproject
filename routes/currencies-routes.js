@@ -10,7 +10,7 @@ const router = express.Router();
  * @responds with returning the data as a JSON
  */
 router.get("/", async (request, response) => {
-  const currencies = await Currency.findAll({include: 'country'});
+  const currencies = await Currency.findAll({ include: "country" });
   response.json(currencies);
 });
 
@@ -19,10 +19,17 @@ router.get("/", async (request, response) => {
  * @receives a get request to the URL: http://localhost:3001/api/currency/:id
  * @responds with returning specific data as a JSON
  */
-router.get("/:id", async (request, response) => {
-  const currency = await Currency.findByPk(request.params.id, {include: 'country'});
-  if (currency) {
-    response.status(200).json(currency);
+router.get("/countryName", async (request, response) => {
+  const currencies = await Currency.findAll({
+    include: "country",
+    attributes: ["currencyCode"],
+  });
+  if (currencies) {
+    const list = currencies.map((currency) => ({
+      currencyCode: currency.currencyCode,
+      countryName: currency.country.name,
+    }));
+    response.status(200).json(list);
   } else {
     response.status(404).json({ error: "resource not found" });
   }
@@ -33,10 +40,12 @@ router.get("/:id", async (request, response) => {
  * @receives a get request to the URL: http://localhost:3001/api/currency/:id
  * @responds with returning specific data as a JSON
  */
-router.get("/:id/countryName", async (request, response) => {
-  const currency = await Currency.findByPk(request.params.id, {include: 'country', attributes: ['currencyCode']});
+router.get("/:id", async (request, response) => {
+  const currency = await Currency.findByPk(request.params.id, {
+    include: "country",
+  });
   if (currency) {
-    response.status(200).json({currencyCode: currency.currencyCode, countryName: currency.country.name});
+    response.status(200).json(currency);
   } else {
     response.status(404).json({ error: "resource not found" });
   }
@@ -74,11 +83,14 @@ router.post("/", async (request, response) => {
     return response.status(200).json(data).end();
   } catch (e) {
     console.error(JSON.stringify(e));
-    if (e.name === 'SequelizeUniqueConstraintError') {
-      return response.status(400).json({ error: 'Country already has a currency.' }).end();
+    if (e.name === "SequelizeUniqueConstraintError") {
+      return response
+        .status(400)
+        .json({ error: "Country already has a currency." })
+        .end();
     }
-    if (e.name === 'SequelizeForeignKeyConstraintError') {
-      return response.status(400).json({ error: 'Country do not exit.' }).end();
+    if (e.name === "SequelizeForeignKeyConstraintError") {
+      return response.status(400).json({ error: "Country do not exit." }).end();
     }
     if (e.message) {
       return response.status(400).json({ error: e.message }).end();
