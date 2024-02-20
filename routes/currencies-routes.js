@@ -29,6 +29,20 @@ router.get("/:id", async (request, response) => {
 });
 
 /**
+ * TODO: GET:id Endpoint (Completed)
+ * @receives a get request to the URL: http://localhost:3001/api/currency/:id
+ * @responds with returning specific data as a JSON
+ */
+router.get("/:id/countryName", async (request, response) => {
+  const currency = await Currency.findByPk(request.params.id, {include: 'country', attributes: ['currencyCode']});
+  if (currency) {
+    response.status(200).json({currencyCode: currency.currencyCode, countryName: currency.country.name});
+  } else {
+    response.status(404).json({ error: "resource not found" });
+  }
+});
+
+/**
  * TODO: POST Endpoint (Completed)
  * @receives a post request to the URL: http://localhost:3001/api/currency,
  * with data object enclosed

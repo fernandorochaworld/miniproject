@@ -7,7 +7,13 @@ GET http://localhost:3001/api/currency
 
 
 ### Get record
+GET http://localhost:3001/api/currency/1/countryName
+
+
+### Get record
 GET http://localhost:3001/api/currency/1
+
+
 
 ### Get record not found
 GET http://localhost:3001/api/currency/3
