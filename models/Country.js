@@ -1,10 +1,15 @@
+const { DataTypes, Model } = require("sequelize");
+const { sequelize } = require("../config/config");
 
-module.exports = (sequelize, DataTypes) => {
-  const Country = sequelize.define("Country", {
+class Country extends Model {}
+
+Country.init(
+  {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+      comment: "Country id integer",
     },
     name: {
       type: DataTypes.STRING,
@@ -12,7 +17,15 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true,
       },
+      comment: "Country name",
     },
-  }, {});
-  return Country;
-};
+  },
+  {
+    sequelize,
+    underscored: false,
+    timestamps: true,
+    modelName: "Country",
+  }
+);
+
+module.exports = Country;

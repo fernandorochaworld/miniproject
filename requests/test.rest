@@ -30,7 +30,7 @@ POST http://localhost:3001/api/currency
 Content-Type: application/json
 
 {
-    "currencyCode": "BRL",
+    "currencyCode": "BRLd",
     "country": "Brazil",
     "conversionRate": 3.68
 }
@@ -40,5 +40,5 @@ PUT http://localhost:3001/api/currency/2/0.9876
 
 
 ### DELETE Currency
-DELETE http://localhost:3001/api/currency/2
+DELETE http://localhost:3001/api/currency/4
 
