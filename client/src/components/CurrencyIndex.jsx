@@ -37,10 +37,12 @@ const CurrencyIndex = ({ handleItemSelected }) => {
               <div className="w-1/4">{item.currencyCode}</div>
               <div className="w-1/4">{item.conversionRate}</div>
               <div className="w-1/4">{item.country.name}</div>
-              <Button className="w-1/6" title="Select" value={item.id} onClick={(e) => handleClick(e)} color="green" />
+              <Button className="w-24" title="Select" value={item.id} onClick={(e) => handleClick(e)} color="green" />
             </div>
           ))}
-          <Button className="w-1/4" title="Unselect Currency" value={0} onClick={(e) => handleClick(e)} color="amber" />
+          <div className="flex w-full justify-center">
+            <Button className="w-40" title="Unselect Currency" value={0} onClick={(e) => handleClick(e)} color="amber" />
+          </div>
 
         </div>
 

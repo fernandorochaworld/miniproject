@@ -15,11 +15,15 @@ async function updateCurrency(id, rate) {
 
 const CurrencyUpdate = ({ currency, reloadIndex }) => {
 
+  const [processing, setProcessing] = useState(false);
+
   const [data, setData] = useState({
     conversionRate: 1,
   });
 
-  async function handleClick() {
+  async function handleUpdateClick() {
+    setProcessing(true);
+
     const result = await updateCurrency(currency.id, data.conversionRate);
     if (result?.id) {
       alert(`New Currency Rate ${result.conversionRate}.`);
@@ -27,6 +31,8 @@ const CurrencyUpdate = ({ currency, reloadIndex }) => {
     } else {
       alert('Error to save currency: ' + result?.error)
     }
+
+    setProcessing(false);
   }
 
   function handleChange(e) {
@@ -50,8 +56,8 @@ const CurrencyUpdate = ({ currency, reloadIndex }) => {
             <Input type="number" name="conversionRate" title="conversion Rate" onChange={handleChange} />
           </div>
 
-          <div className="flex justify-center">
-            <Button className="w-1/3" title="Update" onClick={handleClick} disabled={!currency?.id} />
+          <div className="flex justify-end">
+            <Button className="w-40" title="Update" disabled={processing || !currency?.id} onClick={handleUpdateClick} />
           </div>
         </form>
       </div>

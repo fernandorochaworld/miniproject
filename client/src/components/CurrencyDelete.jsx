@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 
@@ -12,8 +13,11 @@ async function deleteCurrency(id) {
 }
 
 const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
+  const [processing, setProcessing] = useState(false);
 
-  async function handleClick() {
+  async function handleDeleteClick() {
+    setProcessing(true);
+
     const response = await deleteCurrency(currency.id);
     if (response.ok) {
       alert('Successfully Deleted: ' + `${response.status} ${response.statusText}`);
@@ -22,6 +26,8 @@ const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
     } else {
       alert('Error While Deleting: ' + `${response.status} ${response.statusText}`)
     }
+
+    setProcessing(false);
   }
 
   return (
@@ -37,8 +43,8 @@ const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
             <Input type="text" name="currencyCode" title="Currency Code" value={currency?.currencyCode || ''} disabled={true} />
           </div>
 
-          <div className="flex justify-center">
-            <Button className="w-1/3" title="Delete" onClick={handleClick} color="red" />
+          <div className="flex justify-end">
+            <Button className="w-40" title="Delete" disabled={processing || !currency?.id} onClick={handleDeleteClick} color="red" />
           </div>
         </form>
       </div>

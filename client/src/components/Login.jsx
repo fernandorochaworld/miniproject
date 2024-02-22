@@ -14,9 +14,9 @@ const Login = () => {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" action="#" method="POST">
-          <Input type="email" name="email" title="Email address" />
+          <Input type="username" name="username" title="Username" />
 
-          <Input type="password" name="PPP" title="Pass" />
+          <Input type="password" name="password" title="Password" />
 
           <div className="flex flex-row space-x-4">
             <Button title="Login" onClick={handleClick} />

@@ -3,6 +3,9 @@ import Button from "./Button";
 import Input from "./Input";
 
 const CurrencyConvert = ({currency}) => {
+
+  const [processing, setProcessing] = useState(false);
+
   function handleClick() {
     alert('abc')
   }
@@ -17,13 +20,13 @@ const CurrencyConvert = ({currency}) => {
         <form className="space-y-6" action="#" method="POST">
 
           <div className="flex flex-row space-x-4">
-            <Input type="text" name="currencyCode" title="Currency Code" value={currency?.currencyCode || ''} disabled={true} />
+            <Input type="text" name="currencyCodeFrom" title="Currency Code From" value={currency?.currencyCode || ''} disabled={true} />
+            <Input type="text" name="currencyCodeTo" title="Currency Code To" value={''} disabled={true} />
             <Input type="number" name="amount" title="Amount" />
-            <Input type="number" name="amountConverted" title="Amount Converted" disabled={true} />
           </div>
 
-          <div className="flex justify-center">
-            <Button className="w-1/3" title="Convert" onClick={handleClick} />
+          <div className="flex justify-end">
+            <Button className="w-40" title="Convert" disabled={processing || !currency?.id} onClick={handleClick} />
           </div>
         </form>
       </div>

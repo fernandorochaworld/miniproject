@@ -24,15 +24,20 @@ async function addCurrency(currency) {
   return data;
 }
 
+const currencyInitialData = {
+  currencyCode: '',
+  countryName: '',
+  conversionRate: 1,
+};
+
 const CurrencyAdd = ({handleReloadIndex}) => {
 
-  const [data, setData] = useState({
-    currencyCode: '',
-    countryName: '',
-    conversionRate: 1,
-  });
+  const [data, setData] = useState(currencyInitialData);
+  const [processing, setProcessing] = useState(false);
 
-  async function handleClick() {
+  async function handleAddClick() {
+    setProcessing(true);
+
     const country = await addCountry({name: data.countryName});
     console.log('Country', country);
 
@@ -43,6 +48,7 @@ const CurrencyAdd = ({handleReloadIndex}) => {
         countryId: country.id,
       });
       if (currency?.id) {
+        setData(currencyInitialData);
         alert(`New Currency ${currency.currencyCode}.`);
         handleReloadIndex();
       } else {
@@ -51,8 +57,10 @@ const CurrencyAdd = ({handleReloadIndex}) => {
     } else {
       alert('Error to save country: ' + country?.error)
     }
+    setProcessing(false);
   }
-  function handleChange(e) {
+
+  function handleFieldChange(e) {
     setData({
       ...data,
       [e.target.name]: e.target.value
@@ -69,13 +77,13 @@ const CurrencyAdd = ({handleReloadIndex}) => {
         <form className="space-y-6" action="#" method="POST">
 
           <div className="flex flex-row space-x-4">
-            <Input type="text" name="currencyCode" title="Currency Code" onChange={handleChange} />
-            <Input type="text" name="countryName" title="country Name" onChange={handleChange} />
-            <Input type="number" name="conversionRate" title="conversion Rate" onChange={handleChange} />
+            <Input type="text" name="currencyCode" title="Currency Code" value={data.currencyCode} onChange={handleFieldChange} />
+            <Input type="text" name="countryName" title="Country Name" value={data.countryName} onChange={handleFieldChange} />
+            <Input type="number" name="conversionRate" title="Conversion Rate" value={data.conversionRate} onChange={handleFieldChange} />
           </div>
 
-          <div className="flex justify-center">
-            <Button className="w-1/3" title="Add" onClick={handleClick} />
+          <div className="flex justify-end">
+            <Button className="w-40" title="Add" disabled={processing} onClick={handleAddClick} />
           </div>
         </form>
       </div>
