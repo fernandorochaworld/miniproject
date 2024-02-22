@@ -24,7 +24,7 @@ async function addCurrency(currency) {
   return data;
 }
 
-const CurrencyAdd = () => {
+const CurrencyAdd = ({handleReloadIndex}) => {
 
   const [data, setData] = useState({
     currencyCode: '',
@@ -44,6 +44,7 @@ const CurrencyAdd = () => {
       });
       if (currency?.id) {
         alert(`New Currency ${currency.currencyCode}.`);
+        handleReloadIndex();
       } else {
         alert('Error to save currency: ' + currency?.error)
       }
@@ -59,21 +60,21 @@ const CurrencyAdd = () => {
   }
 
   return (
-    <div class="flex min-h-full flex-col justify-center px-6 py-3 lg:px-8">
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Add Currency</h2>
+    <div className="flex min-h-full flex-col justify-center px-6 py-3 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Add Currency</h2>
       </div>
 
-      <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-screen-md">
-        <form class="space-y-6" action="#" method="POST">
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-screen-md">
+        <form className="space-y-6" action="#" method="POST">
 
-          <div class="flex flex-row space-x-4">
+          <div className="flex flex-row space-x-4">
             <Input type="text" name="currencyCode" title="Currency Code" onChange={handleChange} />
             <Input type="text" name="countryName" title="country Name" onChange={handleChange} />
             <Input type="number" name="conversionRate" title="conversion Rate" onChange={handleChange} />
           </div>
 
-          <div class="flex justify-center">
+          <div className="flex justify-center">
             <Button className="w-1/3" title="Add" onClick={handleClick} />
           </div>
         </form>
