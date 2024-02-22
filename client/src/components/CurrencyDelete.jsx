@@ -3,13 +3,17 @@ import Button from "./Button";
 import Input from "./Input";
 
 
-async function deleteCurrency(id) {
+async function deleteCurrency(currencyId, countryId) {
   const requestOptions = {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' }
   };
-  const response = await fetch(`http://localhost:3001/api/currency/${id}`, requestOptions);
-  return response;
+  const responseCurrency = await fetch(`${import.meta.env.VITE_API_URL}/currency/${currencyId}`, requestOptions);
+  if (!responseCurrency.ok) {
+    return responseCurrency;
+  }
+  const responseCountry = await fetch(`${import.meta.env.VITE_API_URL}/country/${countryId}`, requestOptions);
+  return responseCountry;
 }
 
 const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
@@ -18,7 +22,7 @@ const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
   async function handleDeleteClick() {
     setProcessing(true);
 
-    const response = await deleteCurrency(currency.id);
+    const response = await deleteCurrency(currency.id, currency.country.id);
     if (response.ok) {
       alert('Successfully Deleted: ' + `${response.status} ${response.statusText}`);
       handleItemSelected(null);

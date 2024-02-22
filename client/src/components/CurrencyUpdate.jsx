@@ -8,7 +8,7 @@ async function updateCurrency(id, rate) {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' }
   };
-  const response = await fetch(`http://localhost:3001/api/currency/${id}/${rate}`, requestOptions);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/currency/${id}/${rate}`, requestOptions);
   const data = await response.json();
   return data;
 }

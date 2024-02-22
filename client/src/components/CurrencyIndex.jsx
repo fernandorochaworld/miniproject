@@ -6,7 +6,7 @@ const CurrencyIndex = ({ handleItemSelected }) => {
   const [list, setList] = useState();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/currency')
+    fetch(`${import.meta.env.VITE_API_URL}/currency`)
       .then(res => res.json())
       .then(data => {
         setList(data);

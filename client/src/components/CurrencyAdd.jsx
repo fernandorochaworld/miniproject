@@ -8,7 +8,7 @@ async function addCountry(country) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(country)
   };
-  const response = await fetch('http://localhost:3001/api/country', requestOptions);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/country`, requestOptions);
   let data = await response.json();
   return data;
 }
@@ -19,7 +19,7 @@ async function addCurrency(currency) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(currency)
   };
-  const response = await fetch('http://localhost:3001/api/currency', requestOptions);
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/currency`, requestOptions);
   const data = await response.json();
   return data;
 }
