@@ -44,7 +44,11 @@ const CurrencyAdd = () => {
       });
       if (currency?.id) {
         alert(`New Currency ${currency.currencyCode}.`);
+      } else {
+        alert('Error to save currency: ' + currency?.error)
       }
+    } else {
+      alert('Error to save country: ' + country?.error)
     }
   }
   function handleChange(e) {

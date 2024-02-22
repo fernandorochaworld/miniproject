@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 
-const CurrencyIndex = ({handleItemSelected}) => {
+const CurrencyIndex = ({ handleItemSelected }) => {
 
   const [list, setList] = useState();
 
   useEffect(() => {
     fetch('http://localhost:3001/api/currency')
       .then(res => res.json())
-      .then( data => {
+      .then(data => {
         setList(data);
       });
   }, [])
@@ -21,26 +21,30 @@ const CurrencyIndex = ({handleItemSelected}) => {
   }
 
   return (
-    <div class="flex min-h-full flex-col justify-center px-6 py-3 lg:px-8">
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Select One Currency </h2>
-      </div>
+    <div class="flex min-h-full flex-col justify-center px-6 pb-3 pt-8 lg:px-8">
+      <div class="sm:mx-auto sm:w-full sm:max-w-screen-md rounded overflow-hidden shadow-lg p-3">
+        <div class="text-center text-amber-600">
+          * Select one currency to perform the convert, update, and delete opperations.
+        </div>
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Select One Currency </h2>
+        </div>
 
-      <div class="flex flex-wrap mt-10 space-y-1 sm:mx-auto sm:w-full sm:max-w-screen-md">
+        <div class="flex flex-wrap mt-10 space-y-1 sm:mx-auto sm:w-full sm:max-w-screen-md">
 
-        {list && list.map(item => (
-          <div class="flex flex-row w-full space-x-4">
-            <div class="w-1/4">{item.currencyCode}</div>
-            <div class="w-1/4">{item.conversionRate}</div>
-            <div class="w-1/4">{item.country.name}</div>
-            <Button className="w-1/4" title="Select" value={item.id} onClick={(e) => handleClick(e)} />
-          </div>
-        ))}
-        <Button className="w-1/4" title="Unselect Currency" value={0} onClick={(e) => handleClick(e)} />
+          {list && list.map(item => (
+            <div class="flex flex-row w-full space-x-4">
+              <div class="w-1/4">{item.currencyCode}</div>
+              <div class="w-1/4">{item.conversionRate}</div>
+              <div class="w-1/4">{item.country.name}</div>
+              <Button className="w-1/6" title="Select" value={item.id} onClick={(e) => handleClick(e)} color="green" />
+            </div>
+          ))}
+          <Button className="w-1/4" title="Unselect Currency" value={0} onClick={(e) => handleClick(e)} color="amber" />
 
-      </div>
+        </div>
 
-      {/* <div>
+        {/* <div>
         <label for="price" class="block text-sm font-medium leading-6 text-gray-900">Price</label>
         <div class="relative mt-2 rounded-md shadow-sm">
           <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -57,6 +61,7 @@ const CurrencyIndex = ({handleItemSelected}) => {
             </div>
         </div>
       </div> */}
+      </div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ const CurrencyDelete = ({currency}) => {
           </div>
 
           <div class="flex justify-center">
-            <Button className="w-1/3" title="Delete" onClick={handleClick} />
+            <Button className="w-1/3" title="Delete" onClick={handleClick} color="red" />
           </div>
         </form>
       </div>

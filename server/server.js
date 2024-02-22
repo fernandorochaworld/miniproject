@@ -25,7 +25,7 @@ app.use("/", routes);
 try {
   const { sequelize } = require("./config/config");
 
-  sequelize.sync({ force: true }).then((req) => {
+  sequelize.sync({ force: false }).then((req) => {
     app.listen(process.env.SERVER_PORT, () => {
       console.log(`Server running on port: ${process.env.SERVER_PORT}`);
     });
