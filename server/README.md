@@ -5,6 +5,9 @@
 ## Description
 API express for maintain currencies in the Coding in Colour project.
 
+## Setup
+Create a .env file at the project root based on the .env.sample file attached to the project.
+
 
 ## Installation
 
