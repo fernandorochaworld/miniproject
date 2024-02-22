@@ -1,6 +1,6 @@
 # Currencies UI
 
-![React.js Logo](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg)
+![React.js Logo](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg){:height="150px" width="150px"}
 
 ## Description
 UI react.js for maintain currencies in the Coding in Colour project.
