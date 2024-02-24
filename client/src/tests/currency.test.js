@@ -20,12 +20,6 @@ const gbpCurrency = {
   conversionRate: 0.58
 }
 
-const bitcoinCurrency = {
-  conversionRate: 0
-}
-
-const noCurrency = {}
-
 /**
  * Tests follow the format of 
  * test('description', () => { ...your code here... })
@@ -44,17 +38,17 @@ test('same currency conversion', () => {
 })
 
 /**
- * Test 2: TODO
+ * Test 2: Completed
  * Write a test that performs a currency conversion from CDN to GBP, for $100 CDN
  * Hint: the result should be $58 GBP according to our provided currencies.
  */
 test('CDN to GBP conversion', () => {
-  const result = convertCurrency(cdnCurrency, gbpCurrency, 0)
-  expect(result).toBe(0)
+  const result = convertCurrency(cdnCurrency, gbpCurrency, 100)
+  expect(result).toBe(58)
 })
 
 /**
- * Test 3: TODO
+ * Test 3: Completed
  * Write a test that performs a currency conversion from CDN to USD, for $75 CDN
  */
 test('CDN to USD conversion', () => {
@@ -63,7 +57,7 @@ test('CDN to USD conversion', () => {
 })
 
 /**
- * Test 4: TODO
+ * Test 4: Completed
  * Write a test that performs a currency conversion from USD to GBP, for $200 USD
  */
 test('USD to GBP conversion', () => {
@@ -72,7 +66,7 @@ test('USD to GBP conversion', () => {
 })
 
 /**
- * Test 5: TODO
+ * Test 5: Completed
  * Write a test that performs a currency conversion from GBP to CDN, for $50 GBP
  */
 *test('GBP to CDN conversion', () => {
@@ -86,12 +80,12 @@ test('USD to GBP conversion', () => {
 *test('Invalid Currency', () => {
   const exceptionMessage = 'Invalid Currency';
 
-  expect(() => convertCurrency(bitcoinCurrency, cdnCurrency, 5)).toThrow(exceptionMessage);
-  expect(() => convertCurrency(noCurrency, usdCurrency, 5)).toThrow(exceptionMessage);
+  expect(() => convertCurrency({conversionRate: 0 }, cdnCurrency, 5)).toThrow(exceptionMessage);
+  expect(() => convertCurrency({}, usdCurrency, 5)).toThrow(exceptionMessage);
   expect(() => convertCurrency(null, usdCurrency, 5)).toThrow(exceptionMessage);
   
-  expect(() => convertCurrency(cdnCurrency, bitcoinCurrency, 5)).toThrow(exceptionMessage);
-  expect(() => convertCurrency(usdCurrency, noCurrency, 5)).toThrow(exceptionMessage);
+  expect(() => convertCurrency(cdnCurrency, {conversionRate: 0 }, 5)).toThrow(exceptionMessage);
+  expect(() => convertCurrency(usdCurrency, {}, 5)).toThrow(exceptionMessage);
   expect(() => convertCurrency(gbpCurrency, null, 5)).toThrow(exceptionMessage);
   expect(() => convertCurrency()).toThrow(exceptionMessage);
 })
