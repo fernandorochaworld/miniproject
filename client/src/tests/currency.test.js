@@ -93,5 +93,21 @@ test('USD to GBP conversion', () => {
   expect(() => convertCurrency(cdnCurrency, bitcoinCurrency, 5)).toThrow(exceptionMessage);
   expect(() => convertCurrency(usdCurrency, noCurrency, 5)).toThrow(exceptionMessage);
   expect(() => convertCurrency(gbpCurrency, null, 5)).toThrow(exceptionMessage);
+  expect(() => convertCurrency()).toThrow(exceptionMessage);
 })
 
+
+/**
+ * Test Invalid Amounth
+ */
+test('Invalid Amounth', () => {
+  const exceptionMessage = 'Invalid Amounth';
+
+  const result1 = convertCurrency(usdCurrency, gbpCurrency, 0)
+  expect(result1).toBe(0)
+  
+  expect(() => convertCurrency(usdCurrency, gbpCurrency, undefined)).toThrow(exceptionMessage);
+  expect(() => convertCurrency(usdCurrency, gbpCurrency, null)).toThrow(exceptionMessage);
+  expect(() => convertCurrency(usdCurrency, gbpCurrency, 'ABCD')).toThrow(exceptionMessage);
+  expect(() => convertCurrency(usdCurrency, gbpCurrency)).toThrow(exceptionMessage);
+})
