@@ -13,7 +13,7 @@ const convertCurrency = (currencyA, currencyB, amountA) => {
   // This needs to be implemented
   const rateA = currencyA.conversionRate;
   const rateB = currencyB.conversionRate;
-  const amountB = (rateA * amountA) * rateB;
+  const amountB = (1 / rateA) * amountA * rateB;
   return Math.round(amountB);
 }
 
