@@ -70,7 +70,7 @@ test('USD to GBP conversion', () => {
  * Write a test that performs a currency conversion from GBP to CDN, for $50 GBP
  */
 *test('GBP to CDN conversion', () => {
-  // const result = convertCurrency(gbpCurrency, cdnCurrency, 50)
-  // console.log('Result', result);
-  // expect(result).toBe(100)
+  const result = convertCurrency(gbpCurrency, cdnCurrency, 50)
+  expect(result).toBe(86)
 })
+
