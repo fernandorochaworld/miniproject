@@ -10,7 +10,9 @@
  * @returns an integer
  */
 const convertCurrency = (currencyA, currencyB, amountA) => {
-  // This needs to be implemented
+  if (!currencyA?.conversionRate || !currencyB?.conversionRate) {
+    throw new Error('Invalid Currency');
+  }
   const rateA = currencyA.conversionRate;
   const rateB = currencyB.conversionRate;
   const amountB = (1 / rateA) * amountA * rateB;

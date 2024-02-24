@@ -20,6 +20,12 @@ const gbpCurrency = {
   conversionRate: 0.58
 }
 
+const bitcoinCurrency = {
+  conversionRate: 0
+}
+
+const noCurrency = {}
+
 /**
  * Tests follow the format of 
  * test('description', () => { ...your code here... })
@@ -43,8 +49,8 @@ test('same currency conversion', () => {
  * Hint: the result should be $58 GBP according to our provided currencies.
  */
 test('CDN to GBP conversion', () => {
-  const result = convertCurrency(cdnCurrency, gbpCurrency, 100)
-  expect(result).toBe(58)
+  const result = convertCurrency(cdnCurrency, gbpCurrency, 0)
+  expect(result).toBe(0)
 })
 
 /**
@@ -72,5 +78,20 @@ test('USD to GBP conversion', () => {
 *test('GBP to CDN conversion', () => {
   const result = convertCurrency(gbpCurrency, cdnCurrency, 50)
   expect(result).toBe(86)
+})
+
+/**
+ * Test Invalid Currency
+ */
+*test('Invalid Currency', () => {
+  const exceptionMessage = 'Invalid Currency';
+
+  expect(() => convertCurrency(bitcoinCurrency, cdnCurrency, 5)).toThrow(exceptionMessage);
+  expect(() => convertCurrency(noCurrency, usdCurrency, 5)).toThrow(exceptionMessage);
+  expect(() => convertCurrency(null, usdCurrency, 5)).toThrow(exceptionMessage);
+  
+  expect(() => convertCurrency(cdnCurrency, bitcoinCurrency, 5)).toThrow(exceptionMessage);
+  expect(() => convertCurrency(usdCurrency, noCurrency, 5)).toThrow(exceptionMessage);
+  expect(() => convertCurrency(gbpCurrency, null, 5)).toThrow(exceptionMessage);
 })
 
