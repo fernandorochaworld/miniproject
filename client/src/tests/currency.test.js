@@ -52,15 +52,16 @@ test('CDN to GBP conversion', () => {
  * Write a test that performs a currency conversion from CDN to USD, for $75 CDN
  */
 test('CDN to USD conversion', () => {
-  console.log('ResultGBP', result);
-  // Your code here
+  const result = convertCurrency(cdnCurrency, usdCurrency, 75)
+  console.log('Result', result);
+  expect(result).toBe(56)
 })
 
 /**
  * Test 4: TODO
  * Write a test that performs a currency conversion from USD to GBP, for $200 USD
  */
-test('CDN to USD conversion', () => {
+test('USD to GBP conversion', () => {
   // Your code here
 })
 
@@ -68,6 +69,6 @@ test('CDN to USD conversion', () => {
  * Test 5: TODO
  * Write a test that performs a currency conversion from GBP to CDN, for $50 GBP
  */
-test('CDN to USD conversion', () => {
+test('GBP to CDN conversion', () => {
   // Your code here
 })
