@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
-import Button from "./Button";
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import Button from './Button';
 
+CurrencyIndex.propTypes = {
+  handleItemSelected: PropTypes.func,
+};
 const CurrencyIndex = ({ handleItemSelected }) => {
 
   const [list, setList] = useState();
@@ -11,11 +15,11 @@ const CurrencyIndex = ({ handleItemSelected }) => {
       .then(data => {
         setList(data);
       });
-  }, [])
+  }, []);
 
   function handleClick(e) {
     const id = e.target.value;
-    const item = list.find(item => item.id == id)
+    const item = list.find(item => item.id == id);
     console.log('item', item);
     handleItemSelected(item);
   }
@@ -66,6 +70,6 @@ const CurrencyIndex = ({ handleItemSelected }) => {
       </div>
     </div>
   );
-}
+};
 
 export default CurrencyIndex;

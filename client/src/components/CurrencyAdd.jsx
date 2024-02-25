@@ -1,6 +1,7 @@
-import { useState } from "react";
-import Button from "./Button";
-import Input from "./Input";
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import Button from './Button';
+import Input from './Input';
 
 async function addCountry(country) {
   const requestOptions = {
@@ -30,6 +31,10 @@ const currencyInitialData = {
   conversionRate: 1,
 };
 
+
+CurrencyAdd.propTypes = {
+  handleReloadIndex: PropTypes.func,
+};
 const CurrencyAdd = ({handleReloadIndex}) => {
 
   const [data, setData] = useState(currencyInitialData);
@@ -52,10 +57,10 @@ const CurrencyAdd = ({handleReloadIndex}) => {
         alert(`New Currency ${currency.currencyCode}.`);
         handleReloadIndex();
       } else {
-        alert('Error to save currency: ' + currency?.error)
+        alert('Error to save currency: ' + currency?.error);
       }
     } else {
-      alert('Error to save country: ' + country?.error)
+      alert('Error to save country: ' + country?.error);
     }
     setProcessing(false);
   }
@@ -89,6 +94,6 @@ const CurrencyAdd = ({handleReloadIndex}) => {
       </div>
     </div>
   );
-}
+};
 
 export default CurrencyAdd;

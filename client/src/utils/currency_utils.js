@@ -20,6 +20,6 @@ const convertCurrency = (currencyA, currencyB, amountA) => {
   const rateB = currencyB.conversionRate;
   const amountB = (1 / rateA) * amountA * rateB;
   return Math.round(amountB);
-}
+};
 
 module.exports = convertCurrency;

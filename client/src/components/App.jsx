@@ -1,10 +1,10 @@
-import Login from "./Login";
-import CurrencyAdd from "./CurrencyAdd";
-import CurrencyConvert from "./CurrencyConvert";
-import CurrencyDelete from "./CurrencyDelete";
-import CurrencyUpdate from "./CurrencyUpdate";
-import CurrencyIndex from "./CurrencyIndex";
-import { useState } from "react";
+import Login from './Login';
+import CurrencyAdd from './CurrencyAdd';
+import CurrencyConvert from './CurrencyConvert';
+import CurrencyDelete from './CurrencyDelete';
+import CurrencyUpdate from './CurrencyUpdate';
+import CurrencyIndex from './CurrencyIndex';
+import React, { useState } from 'react';
 
 const App = () => {
 
@@ -12,7 +12,7 @@ const App = () => {
   const [countUpdate, setCountUpdate] = useState(1);
 
   function handleItemSelected(item) {
-    console.log('llll', item)
+    console.log('llll', item);
     setCurrency(item);
   }
 
@@ -38,6 +38,6 @@ const App = () => {
       <CurrencyDelete currency={currency} reloadIndex={handleReloadIndex} handleItemSelected={handleItemSelected} />
     </>
   );
-}
+};
 
 export default App;

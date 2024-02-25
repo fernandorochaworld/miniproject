@@ -1,9 +1,10 @@
-import Button from "./Button";
-import Input from "./Input";
+import React from 'react';
+import Button from './Button';
+import Input from './Input';
 
 const Login = () => {
   function handleClick() {
-    alert('abc')
+    alert('abc');
   }
 
   return (
@@ -26,6 +27,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

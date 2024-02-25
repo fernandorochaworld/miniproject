@@ -1,4 +1,4 @@
-const convertCurrency = require("../utils/currency_utils")
+const convertCurrency = require('../utils/currency_utils');
 
 /**
  * The tests below will be based on the following conversion amounts,
@@ -10,15 +10,15 @@ const convertCurrency = require("../utils/currency_utils")
 
 const cdnCurrency = {
   conversionRate: 1 
-}
+};
 
 const usdCurrency = {
   conversionRate: 0.75
-}
+};
 
 const gbpCurrency = {
   conversionRate: 0.58
-}
+};
 
 /**
  * Tests follow the format of 
@@ -33,9 +33,9 @@ const gbpCurrency = {
  * Therefore, we should return the same amount
  */
 test('same currency conversion', () => {
-  const result = convertCurrency(cdnCurrency, cdnCurrency, 100)
-  expect(result).toBe(100)
-})
+  const result = convertCurrency(cdnCurrency, cdnCurrency, 100);
+  expect(result).toBe(100);
+});
 
 /**
  * Test 2: Completed
@@ -43,41 +43,41 @@ test('same currency conversion', () => {
  * Hint: the result should be $58 GBP according to our provided currencies.
  */
 test('CDN to GBP conversion', () => {
-  const result = convertCurrency(cdnCurrency, gbpCurrency, 100)
-  expect(result).toBe(58)
-})
+  const result = convertCurrency(cdnCurrency, gbpCurrency, 100);
+  expect(result).toBe(58);
+});
 
 /**
  * Test 3: Completed
  * Write a test that performs a currency conversion from CDN to USD, for $75 CDN
  */
 test('CDN to USD conversion', () => {
-  const result = convertCurrency(cdnCurrency, usdCurrency, 75)
-  expect(result).toBe(56)
-})
+  const result = convertCurrency(cdnCurrency, usdCurrency, 75);
+  expect(result).toBe(56);
+});
 
 /**
  * Test 4: Completed
  * Write a test that performs a currency conversion from USD to GBP, for $200 USD
  */
 test('USD to GBP conversion', () => {
-  const result = convertCurrency(usdCurrency, gbpCurrency, 200)
-  expect(result).toBe(155)
-})
+  const result = convertCurrency(usdCurrency, gbpCurrency, 200);
+  expect(result).toBe(155);
+});
 
 /**
  * Test 5: Completed
  * Write a test that performs a currency conversion from GBP to CDN, for $50 GBP
  */
-*test('GBP to CDN conversion', () => {
-  const result = convertCurrency(gbpCurrency, cdnCurrency, 50)
-  expect(result).toBe(86)
-})
+test('GBP to CDN conversion', () => {
+  const result = convertCurrency(gbpCurrency, cdnCurrency, 50);
+  expect(result).toBe(86);
+});
 
 /**
  * Test Invalid Currency
  */
-*test('Invalid Currency', () => {
+test('Invalid Currency', () => {
   const exceptionMessage = 'Invalid Currency';
 
   expect(() => convertCurrency({conversionRate: 0 }, cdnCurrency, 5)).toThrow(exceptionMessage);
@@ -88,7 +88,7 @@ test('USD to GBP conversion', () => {
   expect(() => convertCurrency(usdCurrency, {}, 5)).toThrow(exceptionMessage);
   expect(() => convertCurrency(gbpCurrency, null, 5)).toThrow(exceptionMessage);
   expect(() => convertCurrency()).toThrow(exceptionMessage);
-})
+});
 
 
 /**
@@ -97,11 +97,11 @@ test('USD to GBP conversion', () => {
 test('Invalid Amounth', () => {
   const exceptionMessage = 'Invalid Amounth';
 
-  const result1 = convertCurrency(usdCurrency, gbpCurrency, 0)
-  expect(result1).toBe(0)
+  const result1 = convertCurrency(usdCurrency, gbpCurrency, 0);
+  expect(result1).toBe(0);
   
   expect(() => convertCurrency(usdCurrency, gbpCurrency, undefined)).toThrow(exceptionMessage);
   expect(() => convertCurrency(usdCurrency, gbpCurrency, null)).toThrow(exceptionMessage);
   expect(() => convertCurrency(usdCurrency, gbpCurrency, 'ABCD')).toThrow(exceptionMessage);
   expect(() => convertCurrency(usdCurrency, gbpCurrency)).toThrow(exceptionMessage);
-})
+});

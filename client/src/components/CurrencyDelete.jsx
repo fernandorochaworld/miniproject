@@ -1,6 +1,7 @@
-import { useState } from "react";
-import Button from "./Button";
-import Input from "./Input";
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import Button from './Button';
+import Input from './Input';
 
 
 async function deleteCurrency(currencyId, countryId) {
@@ -16,6 +17,11 @@ async function deleteCurrency(currencyId, countryId) {
   return responseCountry;
 }
 
+CurrencyDelete.propTypes = {
+  currency: PropTypes.object,
+  reloadIndex: PropTypes.func,
+  handleItemSelected: PropTypes.func,
+};
 const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
   const [processing, setProcessing] = useState(false);
 
@@ -28,7 +34,7 @@ const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
       handleItemSelected(null);
       reloadIndex();
     } else {
-      alert('Error While Deleting: ' + `${response.status} ${response.statusText}`)
+      alert('Error While Deleting: ' + `${response.status} ${response.statusText}`);
     }
 
     setProcessing(false);
@@ -54,6 +60,6 @@ const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
       </div>
     </div>
   );
-}
+};
 
 export default CurrencyDelete;

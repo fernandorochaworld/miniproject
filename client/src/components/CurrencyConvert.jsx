@@ -1,13 +1,18 @@
-import { useState } from "react";
-import Button from "./Button";
-import Input from "./Input";
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import Button from './Button';
+import Input from './Input';
 
+CurrencyConvert.propTypes = {
+  currency: PropTypes.object,
+};
 const CurrencyConvert = ({currency}) => {
 
-  const [processing, setProcessing] = useState(false);
+  // const [processing, setProcessing] = useState(false);
+  const [processing] = useState(false);
 
   function handleClick() {
-    alert('abc')
+    alert('abc');
   }
 
   return (
@@ -32,6 +37,6 @@ const CurrencyConvert = ({currency}) => {
       </div>
     </div>
   );
-}
+};
 
 export default CurrencyConvert;

@@ -1,6 +1,7 @@
-import { useState } from "react";
-import Button from "./Button";
-import Input from "./Input";
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import Button from './Button';
+import Input from './Input';
 
 
 async function updateCurrency(id, rate) {
@@ -13,6 +14,11 @@ async function updateCurrency(id, rate) {
   return data;
 }
 
+
+CurrencyUpdate.propTypes = {
+  currency: PropTypes.object,
+  reloadIndex: PropTypes.func,
+};
 const CurrencyUpdate = ({ currency, reloadIndex }) => {
 
   const [processing, setProcessing] = useState(false);
@@ -29,7 +35,7 @@ const CurrencyUpdate = ({ currency, reloadIndex }) => {
       alert(`New Currency Rate ${result.conversionRate}.`);
       reloadIndex();
     } else {
-      alert('Error to save currency: ' + result?.error)
+      alert('Error to save currency: ' + result?.error);
     }
 
     setProcessing(false);
@@ -63,6 +69,6 @@ const CurrencyUpdate = ({ currency, reloadIndex }) => {
       </div>
     </div>
   );
-}
+};
 
 export default CurrencyUpdate;

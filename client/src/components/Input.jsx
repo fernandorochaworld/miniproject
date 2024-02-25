@@ -1,8 +1,18 @@
-import { useState } from "react";
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
+Input.propTypes = {
+  type: PropTypes.string.required,
+  name: PropTypes.string.required,
+  title: PropTypes.string.required,
+  value: PropTypes.string,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
+};
 const Input = ({type, name, title, value, className, disabled, onChange}) => {
   
-  const [val, setVal] = useState(value || '');
+  const [, setVal] = useState(value || '');
 
   function handleChange(e) {
     setVal(e.target.value);
@@ -14,10 +24,10 @@ const Input = ({type, name, title, value, className, disabled, onChange}) => {
     <div className="w-full">
       <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">{title}</label>
       <div className="mt-2">
-        <input id={name} name={name} type={type} value={value} required className={myClass} disabled={(disabled)? "disabled" : ""} onChange={handleChange} />
+        <input id={name} name={name} type={type} value={value} required className={myClass} disabled={(disabled)? 'disabled' : ''} onChange={handleChange} />
       </div>
     </div>
   );
-}
+};
 
 export default Input;
