@@ -22,7 +22,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   // color: PropTypes.string,
   className: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.any,
   disabled: PropTypes.bool,
 };
 

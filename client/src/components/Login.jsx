@@ -15,7 +15,7 @@ const Login = () => {
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" action="#" method="POST">
-          <Input type="username" name="username" title="Username" />
+          <Input type="text" name="username" title="Username" />
 
           <Input type="password" name="password" title="Password" />
 

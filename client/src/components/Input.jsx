@@ -22,10 +22,10 @@ const Input = ({type, name, title, value, className, disabled, onChange}) => {
 };
 
 Input.propTypes = {
-  type: PropTypes.string.required,
-  name: PropTypes.string.required,
-  title: PropTypes.string.required,
-  value: PropTypes.string,
+  type: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  value: PropTypes.any,
   className: PropTypes.string,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
