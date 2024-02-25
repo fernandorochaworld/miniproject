@@ -2,14 +2,30 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import Button from './Button';
 import Input from './Input';
+import convertCurrency from '../utils/currency_utils';
 
-const CurrencyConvert = ({currency}) => {
+const CurrencyConvert = ({currencyFrom, currencyTo}) => {
 
   // const [processing, setProcessing] = useState(false);
   const [processing] = useState(false);
+  const [data, setData] = useState({
+    amountFrom: 0,
+    amountTo: 0,
+  });
 
-  function handleClick() {
-    alert('abc');
+  function handleFieldChange(e) {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  function handleClickConvert() {
+    const amountTo = convertCurrency(currencyFrom, currencyTo, parseFloat(data.amountFrom));
+    setData({
+      ...data,
+      amountTo
+    });
   }
 
   return (
@@ -22,13 +38,14 @@ const CurrencyConvert = ({currency}) => {
         <form className="space-y-6" action="#" method="POST">
 
           <div className="flex flex-row space-x-4">
-            <Input type="text" name="currencyCodeFrom" title="Currency Code From" value={currency?.currencyCode || ''} disabled={true} />
-            <Input type="text" name="currencyCodeTo" title="Currency Code To" value={''} disabled={true} />
-            <Input type="number" name="amount" title="Amount" />
+            <Input type="text" name="currencyCodeFrom" title="Currency From" value={currencyFrom?.currencyCode || ''} disabled={true} />
+            <Input type="text" name="currencyCodeTo" title="Currency To" value={currencyTo?.currencyCode || ''} disabled={true} />
+            <Input type="number" name="amountFrom" title="Amount" value={data.amountFrom} onChange={(e) => handleFieldChange(e)} />
+            <Input type="number" name="amountTo" title="Converted Amount" value={data.amountTo} disabled={true} />
           </div>
 
           <div className="flex justify-end">
-            <Button className="w-40" title="Convert" disabled={processing || !currency?.id} onClick={handleClick} />
+            <Button className="w-40" title="Convert" disabled={processing || !currencyFrom?.id || !currencyTo?.id} onClick={handleClickConvert} />
           </div>
         </form>
       </div>
@@ -37,7 +54,8 @@ const CurrencyConvert = ({currency}) => {
 };
 
 CurrencyConvert.propTypes = {
-  currency: PropTypes.object,
+  currencyFrom: PropTypes.object,
+  currencyTo: PropTypes.object,
 };
 
 export default CurrencyConvert;

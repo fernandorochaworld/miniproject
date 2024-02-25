@@ -22,4 +22,4 @@ const convertCurrency = (currencyA, currencyB, amountA) => {
   return Math.round(amountB);
 };
 
-module.exports = convertCurrency;
+export default convertCurrency;

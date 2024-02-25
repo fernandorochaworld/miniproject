@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import Button from './Button';
 
-const CurrencyIndex = ({ handleItemSelected }) => {
+const selectItem = (list, id) => list.find(item => item.id == id);
+
+const CurrencyIndex = ({ handleSelecteCurrency, handleSelecteCurrencyTo }) => {
 
   const [list, setList] = useState();
 
@@ -18,7 +20,18 @@ const CurrencyIndex = ({ handleItemSelected }) => {
     const id = e.target.value;
     const item = list.find(item => item.id == id);
     console.log('item', item);
-    handleItemSelected(item);
+    handleSelecteCurrency(item);
+  }
+
+  function handleClickTo(e) {
+    const id = e.target.value;
+    const item = selectItem(list, id);
+    handleSelecteCurrencyTo(item);
+  }
+
+  function handleClickClear() {
+    handleSelecteCurrency(null);
+    handleSelecteCurrencyTo(null);
   }
 
   return (
@@ -38,11 +51,12 @@ const CurrencyIndex = ({ handleItemSelected }) => {
               <div className="w-1/4">{item.currencyCode}</div>
               <div className="w-1/4">{item.conversionRate}</div>
               <div className="w-1/4">{item.country.name}</div>
-              <Button className="w-24" title="Select" value={item.id} onClick={(e) => handleClick(e)} color="green" />
+              <Button className="w-12" title="From" value={item.id} onClick={(e) => handleClick(e)} color="green" />
+              <Button className="w-12" title="To" value={item.id} onClick={(e) => handleClickTo(e)} color="green" />
             </div>
           ))}
           <div className="flex w-full justify-center">
-            <Button className="w-40" title="Unselect Currency" value={0} onClick={(e) => handleClick(e)} color="amber" />
+            <Button className="w-40" title="Unselect Currencies" value={0} onClick={handleClickClear} color="amber" />
           </div>
 
         </div>
@@ -70,7 +84,8 @@ const CurrencyIndex = ({ handleItemSelected }) => {
 };
 
 CurrencyIndex.propTypes = {
-  handleItemSelected: PropTypes.func,
+  handleSelecteCurrency: PropTypes.func,
+  handleSelecteCurrencyTo: PropTypes.func,
 };
 
 export default CurrencyIndex;

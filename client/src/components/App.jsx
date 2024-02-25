@@ -9,11 +9,17 @@ import React, { useState } from 'react';
 const App = () => {
 
   const [currency, setCurrency] = useState();
+  const [currencyTo, setCurrencyTo] = useState();
   const [countUpdate, setCountUpdate] = useState(1);
 
-  function handleItemSelected(item) {
-    console.log('llll', item);
+  function handleSelecteCurrency(item) {
+    console.log('handleSelecteCurrency', item);
     setCurrency(item);
+  }
+
+  function handleSelecteCurrencyTo(item) {
+    console.log('handleSelecteCurrencyTo', item);
+    setCurrencyTo(item);
   }
 
   function handleReloadIndex() {
@@ -23,19 +29,32 @@ const App = () => {
   return (
     <>
       <Login />
-      <CurrencyIndex handleItemSelected={handleItemSelected} key={countUpdate} />
+      <CurrencyIndex handleSelecteCurrency={handleSelecteCurrency} handleSelecteCurrencyTo={handleSelecteCurrencyTo} key={countUpdate} />
       
       {
         currency &&
-        <div className="text-amber-600 text-center text-4xl font-bold mt-4">
-          Selected Currency: {currency?.currencyCode} - {currency?.country?.name}
+        <div className="text-amber-600 text-center text-2xl mt-4">
+          Selected Currency: &nbsp;
+          <span className='text-4xl font-bold'>
+            {currency?.currencyCode} - {currency?.country?.name} 
+          </span>
+          <br />
+          {
+            currencyTo &&
+            <span>
+              Convert to&nbsp;
+              <span className='text-4xl font-bold'>
+                {currencyTo?.currencyCode} - {currencyTo?.country?.name}
+              </span>
+            </span>
+          }
         </div>
       }
 
       <CurrencyAdd handleReloadIndex={handleReloadIndex} />
-      <CurrencyConvert currency={currency} />
+      <CurrencyConvert currencyFrom={currency} currencyTo={currencyTo} />
       <CurrencyUpdate currency={currency} reloadIndex={handleReloadIndex} />
-      <CurrencyDelete currency={currency} reloadIndex={handleReloadIndex} handleItemSelected={handleItemSelected} />
+      <CurrencyDelete currency={currency} reloadIndex={handleReloadIndex} handleItemSelected={handleSelecteCurrency} />
     </>
   );
 };
