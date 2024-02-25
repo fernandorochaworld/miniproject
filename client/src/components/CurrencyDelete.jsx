@@ -17,11 +17,6 @@ async function deleteCurrency(currencyId, countryId) {
   return responseCountry;
 }
 
-CurrencyDelete.propTypes = {
-  currency: PropTypes.object,
-  reloadIndex: PropTypes.func,
-  handleItemSelected: PropTypes.func,
-};
 const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
   const [processing, setProcessing] = useState(false);
 
@@ -60,6 +55,12 @@ const CurrencyDelete = ({currency, reloadIndex, handleItemSelected}) => {
       </div>
     </div>
   );
+};
+
+CurrencyDelete.propTypes = {
+  currency: PropTypes.object,
+  reloadIndex: PropTypes.func,
+  handleItemSelected: PropTypes.func,
 };
 
 export default CurrencyDelete;

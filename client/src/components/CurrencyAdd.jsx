@@ -32,9 +32,6 @@ const currencyInitialData = {
 };
 
 
-CurrencyAdd.propTypes = {
-  handleReloadIndex: PropTypes.func,
-};
 const CurrencyAdd = ({handleReloadIndex}) => {
 
   const [data, setData] = useState(currencyInitialData);
@@ -94,6 +91,10 @@ const CurrencyAdd = ({handleReloadIndex}) => {
       </div>
     </div>
   );
+};
+
+CurrencyAdd.propTypes = {
+  handleReloadIndex: PropTypes.func,
 };
 
 export default CurrencyAdd;

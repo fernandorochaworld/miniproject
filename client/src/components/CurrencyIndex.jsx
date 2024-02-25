@@ -2,9 +2,6 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import Button from './Button';
 
-CurrencyIndex.propTypes = {
-  handleItemSelected: PropTypes.func,
-};
 const CurrencyIndex = ({ handleItemSelected }) => {
 
   const [list, setList] = useState();
@@ -70,6 +67,10 @@ const CurrencyIndex = ({ handleItemSelected }) => {
       </div>
     </div>
   );
+};
+
+CurrencyIndex.propTypes = {
+  handleItemSelected: PropTypes.func,
 };
 
 export default CurrencyIndex;

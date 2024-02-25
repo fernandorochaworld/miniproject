@@ -1,15 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-Input.propTypes = {
-  type: PropTypes.string.required,
-  name: PropTypes.string.required,
-  title: PropTypes.string.required,
-  value: PropTypes.string,
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  onChange: PropTypes.func,
-};
 const Input = ({type, name, title, value, className, disabled, onChange}) => {
   
   const [, setVal] = useState(value || '');
@@ -28,6 +19,16 @@ const Input = ({type, name, title, value, className, disabled, onChange}) => {
       </div>
     </div>
   );
+};
+
+Input.propTypes = {
+  type: PropTypes.string.required,
+  name: PropTypes.string.required,
+  title: PropTypes.string.required,
+  value: PropTypes.string,
+  className: PropTypes.string,
+  disabled: PropTypes.bool,
+  onChange: PropTypes.func,
 };
 
 export default Input;

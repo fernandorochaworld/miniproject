@@ -3,9 +3,6 @@ import React, { useState } from 'react';
 import Button from './Button';
 import Input from './Input';
 
-CurrencyConvert.propTypes = {
-  currency: PropTypes.object,
-};
 const CurrencyConvert = ({currency}) => {
 
   // const [processing, setProcessing] = useState(false);
@@ -37,6 +34,10 @@ const CurrencyConvert = ({currency}) => {
       </div>
     </div>
   );
+};
+
+CurrencyConvert.propTypes = {
+  currency: PropTypes.object,
 };
 
 export default CurrencyConvert;

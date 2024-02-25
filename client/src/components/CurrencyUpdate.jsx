@@ -15,10 +15,6 @@ async function updateCurrency(id, rate) {
 }
 
 
-CurrencyUpdate.propTypes = {
-  currency: PropTypes.object,
-  reloadIndex: PropTypes.func,
-};
 const CurrencyUpdate = ({ currency, reloadIndex }) => {
 
   const [processing, setProcessing] = useState(false);
@@ -69,6 +65,10 @@ const CurrencyUpdate = ({ currency, reloadIndex }) => {
       </div>
     </div>
   );
+};
+CurrencyUpdate.propTypes = {
+  currency: PropTypes.object,
+  reloadIndex: PropTypes.func,
 };
 
 export default CurrencyUpdate;
