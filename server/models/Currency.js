@@ -48,7 +48,7 @@ Currency.init(
     sequelize,
     underscored: false,
     timestamps: true,
-    modelName: "Currency",
+    modelName: (process.env.DB_NAME==='production'?'':'Test')+"Currency",
   }
 );
 

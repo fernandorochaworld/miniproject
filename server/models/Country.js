@@ -25,7 +25,7 @@ Country.init(
     sequelize,
     underscored: false,
     timestamps: true,
-    modelName: "Country",
+    modelName: (process.env.DB_NAME==='production'?'':'Test')+"Country",
   }
 );
 
