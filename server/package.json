@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "start-dev": "cross-env NODE_ENV=development nodemon server.js",
+    "init-data": "cross-env NODE_ENV=development node config/init-data.js",
     "test": "npx jest --verbose -runInBand"
   },
   "author": "Student",
