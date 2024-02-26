@@ -61,10 +61,10 @@ describe('GET tests', () => {
 
 describe('POST tests', () => {
   // Add a currency, and verify that a currency is added to our database
-  const newCountry = {name: 'Brazil'};
-  const newCurrency = {currencyCode: 'BRL', conversionRate: 3.6};
+  const newCountry = { name: 'Brazil' };
+  const newCurrency = { currencyCode: 'BRL', conversionRate: 3.6 };
   test('adding a currency', async () => {
-    
+
     // Verify that we get the same currency
 
     // ADD Country
@@ -72,7 +72,7 @@ describe('POST tests', () => {
       .post('/api/country')
       .send(newCountry)
       .expect(200);
-    console.log('2-body', responseCountry.body);
+
     expect(responseCountry.body?.id).toBeDefined();
 
     // ADD Currency
@@ -83,7 +83,6 @@ describe('POST tests', () => {
         countryId: responseCountry.body?.id
       })
       .expect(200);
-      console.log('3-body', responseCurrency.body);
 
     expect(newCurrency.currencyCode).toEqual(responseCurrency.body.currencyCode)
     expect(newCurrency.conversionRate).toEqual(responseCurrency.body.conversionRate)
@@ -100,8 +99,6 @@ describe('PUT tests', () => {
     const response = await api
       .put(`/api/currency/${id}/${newConversionRate}`)
       .expect(200);
-    console.log('4-body', response.body);
-      
 
     expect(response.body.conversionRate).toEqual(newConversionRate)
   })
