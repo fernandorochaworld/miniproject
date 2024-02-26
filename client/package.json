@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "npx jest --verbose -runInBand",
-    "lint": "npx eslint ./**"
+    "lint": "npx eslint \"**/*.{js,jsx}\"",
+    "lint-fix": "npx eslint \"**/*.{js,jsx}\" --fix"
   },
   "dependencies": {
     "prop-types": "^15.8.1",

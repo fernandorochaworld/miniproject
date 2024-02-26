@@ -8,8 +8,10 @@
     "start-test": "cross-env NODE_ENV=test nodemon server.js",
     "init-data": "cross-env NODE_ENV=test node config/init-data.js",
     "test": "cross-env NODE_ENV=test jest --verbose -runInBand",
-    "lint": "npx eslint ./**",
-    "lint-fix": "npx eslint ./** --fix"
+    "lint": "npx eslint \"**/*.{js,jsx}\"",
+    "lint-fix": "npx eslint \"**/*.{js,jsx}\" --fix",
+    "build-ui": "rm -rf public && cd ../client && npm run build && cp -r dist ../server/public && rm -rf dist",
+    "build-push": "npm  run build-ui && cd ../server && git add . && git commit -m 'build' && git push"
   },
   "author": "Student",
   "license": "ISC",
