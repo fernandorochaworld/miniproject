@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require("sequelize");
-const { sequelize } = require("../config/config");
+const { DataTypes, Model } = require('sequelize');
+const { sequelize } = require('../config/config');
 
 class Country extends Model {}
 
@@ -9,7 +9,7 @@ Country.init(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-      comment: "Country id integer",
+      comment: 'Country id integer',
     },
     name: {
       type: DataTypes.STRING,
@@ -18,14 +18,14 @@ Country.init(
       validate: {
         notEmpty: true,
       },
-      comment: "Country name",
+      comment: 'Country name',
     },
   },
   {
     sequelize,
     underscored: false,
     timestamps: true,
-    modelName: (process.env.NODE_ENV==='test'?'Test':'')+"Country",
+    modelName: (process.env.NODE_ENV==='test'?'Test':'')+'Country',
   }
 );
 

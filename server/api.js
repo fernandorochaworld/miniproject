@@ -1,9 +1,9 @@
-const express = require("express"); // We import the express application
-require("dotenv").config(); // Necessary for localhost
-const cors = require("cors"); // Necessary for localhost
+const express = require('express'); // We import the express application
+require('dotenv').config(); // Necessary for localhost
+const cors = require('cors'); // Necessary for localhost
 const app = express(); // Creates an express application in app
-const morgan = require("morgan");
-const routes = require("./routes/routes");
+const morgan = require('morgan');
+const routes = require('./routes/routes');
 
 /**
  * Initial application setup
@@ -13,13 +13,13 @@ const routes = require("./routes/routes");
 app.use(cors());
 app.use(express.json());
 
-morgan.token("req-body", (req) => JSON.stringify(req.body));
+morgan.token('req-body', (req) => JSON.stringify(req.body));
 app.use(
   morgan(
-    ":method :url :status :res[content-length] - :response-time ms :req-body"
+    ':method :url :status :res[content-length] - :response-time ms :req-body'
   )
 );
 
-app.use("/", routes);
+app.use('/', routes);
 
 module.exports =  app;

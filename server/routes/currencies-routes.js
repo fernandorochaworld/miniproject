@@ -1,7 +1,7 @@
-const express = require("express");
-const Currency = require("../models/Currency.JS");
-const { currencyValidation } = require("../utils/validation");
-const { Op } = require("sequelize");
+const express = require('express');
+const Currency = require('../models/Currency.JS');
+const { currencyValidation } = require('../utils/validation');
+const { Op } = require('sequelize');
 const router = express.Router();
 
 /**
@@ -9,8 +9,8 @@ const router = express.Router();
  * @receives a get request to the URL: http://localhost:3001/api/currency/
  * @responds with returning the data as a JSON
  */
-router.get("/", async (request, response) => {
-  const currencies = await Currency.findAll({ include: "country" });
+router.get('/', async (request, response) => {
+  const currencies = await Currency.findAll({ include: 'country' });
   response.json(currencies);
 });
 
@@ -19,10 +19,10 @@ router.get("/", async (request, response) => {
  * @receives a get request to the URL: http://localhost:3001/api/currency/:id
  * @responds with returning specific data as a JSON
  */
-router.get("/countryName", async (request, response) => {
+router.get('/countryName', async (request, response) => {
   const currencies = await Currency.findAll({
-    include: "country",
-    attributes: ["currencyCode"],
+    include: 'country',
+    attributes: ['currencyCode'],
   });
   if (currencies) {
     const list = currencies.map((currency) => ({
@@ -31,7 +31,7 @@ router.get("/countryName", async (request, response) => {
     }));
     response.status(200).json(list);
   } else {
-    response.status(404).json({ error: "resource not found" });
+    response.status(404).json({ error: 'resource not found' });
   }
 });
 
@@ -40,14 +40,14 @@ router.get("/countryName", async (request, response) => {
  * @receives a get request to the URL: http://localhost:3001/api/currency/:id
  * @responds with returning specific data as a JSON
  */
-router.get("/:id", async (request, response) => {
+router.get('/:id', async (request, response) => {
   const currency = await Currency.findByPk(request.params.id, {
-    include: "country",
+    include: 'country',
   });
   if (currency) {
     response.status(200).json(currency);
   } else {
-    response.status(404).json({ error: "resource not found" });
+    response.status(404).json({ error: 'resource not found' });
   }
 });
 
@@ -57,7 +57,7 @@ router.get("/:id", async (request, response) => {
  * with data object enclosed
  * @responds by returning the newly created resource
  */
-router.post("/", async (request, response) => {
+router.post('/', async (request, response) => {
   const { currencyCode, conversionRate, countryId } = request.body;
   const currency = { currencyCode, conversionRate, countryId };
 
@@ -71,7 +71,7 @@ router.post("/", async (request, response) => {
     });
     // Validate existing currencyCode
     if (conflictCode) {
-      throw new Error("currencyCode already exists.");
+      throw new Error('currencyCode already exists.');
     }
   } catch (e) {
     console.error(JSON.stringify(e));
@@ -83,19 +83,19 @@ router.post("/", async (request, response) => {
     return response.status(200).json(data).end();
   } catch (e) {
     console.error(JSON.stringify(e));
-    if (e.name === "SequelizeUniqueConstraintError") {
+    if (e.name === 'SequelizeUniqueConstraintError') {
       return response
         .status(400)
-        .json({ error: "Country already has a currency." })
+        .json({ error: 'Country already has a currency.' })
         .end();
     }
-    if (e.name === "SequelizeForeignKeyConstraintError") {
-      return response.status(400).json({ error: "Country do not exit." }).end();
+    if (e.name === 'SequelizeForeignKeyConstraintError') {
+      return response.status(400).json({ error: 'Country do not exit.' }).end();
     }
     if (e.message) {
       return response.status(400).json({ error: e.message }).end();
     }
-    let msg = "";
+    let msg = '';
     e.errors.map((er) => {
       msg += er.message;
     });
@@ -110,10 +110,10 @@ router.post("/", async (request, response) => {
  * Hint: updates the currency with the new conversion rate
  * @responds by returning the newly updated resource
  */
-router.put("/:id/:newRate", async (request, response) => {
+router.put('/:id/:newRate', async (request, response) => {
   const currency = await Currency.findByPk(request.params.id);
   if (!currency) {
-    return response.status(400).json({ error: "resource not found" });
+    return response.status(400).json({ error: 'resource not found' });
   }
   currency.conversionRate = parseFloat(request.params.newRate) || 0;
   await currency.save();
@@ -125,10 +125,10 @@ router.put("/:id/:newRate", async (request, response) => {
  * @receives a delete request to the URL: http://localhost:3001/api/currency/:id,
  * @responds by returning a status code of 204
  */
-router.delete("/:id", async (request, response) => {
+router.delete('/:id', async (request, response) => {
   const currency = await Currency.findByPk(request.params.id);
   if (!currency) {
-    return response.status(400).json({ error: "resource not found" });
+    return response.status(400).json({ error: 'resource not found' });
   }
 
   await currency.destroy();

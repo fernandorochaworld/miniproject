@@ -1,5 +1,5 @@
-const express = require("express");
-const Country = require("../models/Country");
+const express = require('express');
+const Country = require('../models/Country');
 const router = express.Router();
 
 /**
@@ -7,7 +7,7 @@ const router = express.Router();
  * @receives a get request to the URL: http://localhost:3001/api/country/
  * @responds with returning the data as a JSON
  */
-router.get("/", async (request, response) => {
+router.get('/', async (request, response) => {
   const countries = await Country.findAll({include: 'currency'});
   response.json(countries);
 });
@@ -17,12 +17,12 @@ router.get("/", async (request, response) => {
  * @receives a get request to the URL: http://localhost:3001/api/country/:id
  * @responds with returning specific data as a JSON
  */
-router.get("/:id", async (request, response) => {
+router.get('/:id', async (request, response) => {
   const country = await Country.findByPk(request.params.id, {include: 'currency'});
   if (country) {
     response.status(200).json(country);
   } else {
-    response.status(404).json({ error: "resource not found" });
+    response.status(404).json({ error: 'resource not found' });
   }
 });
 
@@ -32,12 +32,12 @@ router.get("/:id", async (request, response) => {
  * with data object enclosed
  * @responds by returning the newly created resource
  */
-router.post("/", async (request, response) => {
+router.post('/', async (request, response) => {
   const { name } = request.body;
 
   try {
     if (!name) {
-      throw new Error("name is missing");
+      throw new Error('name is missing');
     }
   } catch (e) {
     console.error(JSON.stringify(e));
@@ -50,7 +50,7 @@ router.post("/", async (request, response) => {
   } catch (e) {
     response
       .status(404)
-      .json({ error: "error to insert record: " + e?.message });
+      .json({ error: 'error to insert record: ' + e?.message });
   }
 });
 
@@ -61,10 +61,10 @@ router.post("/", async (request, response) => {
  * Hint: updates the country with the new conversion rate
  * @responds by returning the newly updated resource
  */
-router.put("/:id/:newName", async (request, response) => {
+router.put('/:id/:newName', async (request, response) => {
   const country = await Country.findByPk(request.params.id);
   if (!country) {
-    return response.status(400).json({ error: "resource not found" });
+    return response.status(400).json({ error: 'resource not found' });
   }
   country.name = request.params.newName;
   await country.save();
@@ -76,10 +76,10 @@ router.put("/:id/:newName", async (request, response) => {
  * @receives a delete request to the URL: http://localhost:3001/api/country/:id,
  * @responds by returning a status code of 204
  */
-router.delete("/:id", async (request, response) => {
+router.delete('/:id', async (request, response) => {
   const country = await Country.findByPk(request.params.id);
   if (!country) {
-    return response.status(400).json({ error: "resource not found" });
+    return response.status(400).json({ error: 'resource not found' });
   }
 
   await country.destroy();

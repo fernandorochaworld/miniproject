@@ -1,8 +1,8 @@
-const api = require("./api");
+const api = require('./api');
 
 
 try {
-  const { sequelize } = require("./config/config");
+  const { sequelize } = require('./config/config');
 
   sequelize.sync().then((req) => {
     api.listen(process.env.SERVER_PORT, () => {
@@ -10,7 +10,7 @@ try {
     });
   });
 
-  console.log("Connection has been established successfully.");
+  console.log('Connection has been established successfully.');
 } catch (error) {
-  console.error("Unable to connect to the database:", error);
+  console.error('Unable to connect to the database:', error);
 }

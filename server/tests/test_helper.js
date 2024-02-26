@@ -2,8 +2,8 @@
  * Provide the path to your test currency model, this model will be exactly the same as your Currency model, except...
  * It will not require the connection to Country.
  */
-const Country = require("../models/Country");
-const Currency = require("../models/Currency");
+const Country = require('../models/Country');
+const Currency = require('../models/Currency');
 
 /**
  * We need to initialize our test tables, so we will write variables to store our initial database state,
@@ -27,25 +27,25 @@ const initialCurrencies = [
     conversionRate: 0.75,
     countryId: 2
   }
-]
+];
 
 // Returns all currencies from the DB table
 const currenciesInDb = async () => {
-  const testCurrencies = await Currency.findAll({})
-  return testCurrencies.map(currency => currency.toJSON())
-}
+  const testCurrencies = await Currency.findAll({});
+  return testCurrencies.map(currency => currency.toJSON());
+};
 
 // Initialize table
 const init = async () => {
-  await Country.sync()
-  await Currency.sync()
+  await Country.sync();
+  await Currency.sync();
 };
 
 // Perform a bulk write
 const load = async () => {
-  await Country.bulkCreate(initialCountries)
-  await Currency.bulkCreate(initialCurrencies)
-}
+  await Country.bulkCreate(initialCountries);
+  await Currency.bulkCreate(initialCurrencies);
+};
 
 
 // Clears all test tables in the database
@@ -53,12 +53,12 @@ const clearData = async () => {
   const abc = await Currency.destroy({
     // where: {},
     truncate: true
-  })
+  });
   const xyz = await Country.destroy({
     where: {},
     // truncate: true
-  })
-}
+  });
+};
 
 module.exports = {
   initialCurrencies,
@@ -67,4 +67,4 @@ module.exports = {
   init,
   load,
   clearData
-}
+};

@@ -1,6 +1,6 @@
-const { DataTypes, Model, Deferrable } = require("sequelize");
-const { sequelize } = require("../config/config");
-const Country = require("./Country");
+const { DataTypes, Model, Deferrable } = require('sequelize');
+const { sequelize } = require('../config/config');
+const Country = require('./Country');
 
 class Currency extends Model {}
 
@@ -10,7 +10,7 @@ Currency.init(
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
-      comment: "Currency primary key",
+      comment: 'Currency primary key',
     },
     currencyCode: {
       type: DataTypes.STRING,
@@ -19,7 +19,7 @@ Currency.init(
       validate: {
         notEmpty: true,
       },
-      comment: "Currency code i.e: BRL, USD, CAD",
+      comment: 'Currency code i.e: BRL, USD, CAD',
     },
     countryId: {
       type: DataTypes.INTEGER,
@@ -30,10 +30,10 @@ Currency.init(
       },
       references: {
         model: Country,
-        key: "id",
+        key: 'id',
         deferrable: Deferrable.INITIALLY_IMMEDIATE,
       },
-      comment: "References to Country",
+      comment: 'References to Country',
     },
     conversionRate: {
       type: DataTypes.FLOAT,
@@ -41,14 +41,14 @@ Currency.init(
       validate: {
         notEmpty: true,
       },
-      comment: "Rate used to convertion to CAD",
+      comment: 'Rate used to convertion to CAD',
     },
   },
   {
     sequelize,
     underscored: false,
     timestamps: true,
-    modelName: (process.env.NODE_ENV==='test'?'Test':'')+"Currency",
+    modelName: (process.env.NODE_ENV==='test'?'Test':'')+'Currency',
   }
 );
 
