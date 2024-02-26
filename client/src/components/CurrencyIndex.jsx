@@ -16,7 +16,7 @@ const CurrencyIndex = ({ handleSelecteCurrency, handleSelecteCurrencyTo }) => {
       });
   }, []);
 
-  function handleClick(e) {
+  function handleClickSelect(e) {
     const id = e.target.value;
     const item = list.find(item => item.id == id);
     console.log('item', item);
@@ -56,7 +56,7 @@ const CurrencyIndex = ({ handleSelecteCurrency, handleSelecteCurrencyTo }) => {
               <div className="w-1/4">{item.currencyCode}</div>
               <div className="w-1/4">{item.conversionRate}</div>
               <div className="w-1/4">{item.country.name}</div>
-              <Button className="w-12" title="Select" value={item.id} onClick={(e) => handleClick(e)} color="green" />
+              <Button className="w-12" title="Select" value={item.id} onClick={(e) => handleClickSelect(e)} color="green" />
               <Button className="w-12" title="To" value={item.id} onClick={(e) => handleClickTo(e)} color="green" />
             </div>
           ))}

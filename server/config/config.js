@@ -2,8 +2,6 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const pg = require('pg');
 
-console.log('process.env.DB_NAME', process.env.DB_NAME);
-
 // Setup sequelize for connecting to our database
 const sequelize = new Sequelize(
   process.env.DB_NAME,
