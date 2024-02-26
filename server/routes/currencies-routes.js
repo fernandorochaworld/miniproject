@@ -1,5 +1,5 @@
 const express = require('express');
-const Currency = require('../models/Currency.JS');
+const Currency = require('../models/Currency');
 const { currencyValidation } = require('../utils/validation');
 const router = express.Router();
 
