@@ -1,7 +1,6 @@
 const express = require('express');
 const Currency = require('../models/Currency.JS');
 const { currencyValidation } = require('../utils/validation');
-const { Op } = require('sequelize');
 const router = express.Router();
 
 /**

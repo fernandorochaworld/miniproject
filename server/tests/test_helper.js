@@ -50,11 +50,11 @@ const load = async () => {
 
 // Clears all test tables in the database
 const clearData = async () => {
-  const abc = await Currency.destroy({
+  await Currency.destroy({
     // where: {},
     truncate: true
   });
-  const xyz = await Country.destroy({
+  await Country.destroy({
     where: {},
     // truncate: true
   });
