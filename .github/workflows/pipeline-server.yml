@@ -23,10 +23,10 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Install Dependencies
-        uses: npm install
+        run: npm install
 
       - name: Check Lint
-        uses: npm run lint
+        run: npm run lint
 
       - name: Run test
-        uses: npm run test
+        run: npm run test
