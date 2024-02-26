@@ -55,7 +55,7 @@ const CurrencyUpdate = ({ currency, reloadIndex }) => {
 
           <div className="flex flex-row space-x-4">
             <Input type="text" name="currencyCode" title="Currency Code" value={currency?.currencyCode || ''} disabled={true} />
-            <Input type="number" name="conversionRate" title="conversion Rate" onChange={handleChange} />
+            <Input type="number" name="conversionRate" title="New Conversion Rate" onChange={handleChange} />
           </div>
 
           <div className="flex justify-end">

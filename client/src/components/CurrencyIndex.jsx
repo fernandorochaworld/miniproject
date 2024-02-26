@@ -45,13 +45,18 @@ const CurrencyIndex = ({ handleSelecteCurrency, handleSelecteCurrencyTo }) => {
         </div>
 
         <div className="flex flex-wrap mt-10 space-y-1 sm:mx-auto sm:w-full sm:max-w-screen-md">
-
+          <div className="flex flex-row w-full space-x-4" key="header">
+            <div className="w-1/4">Currency Code</div>
+            <div className="w-1/4">Rate</div>
+            <div className="w-1/4">Country</div>
+            <div className="w-24">Options</div>
+          </div>
           {list && list.map(item => (
             <div className="flex flex-row w-full space-x-4" key={item.id}>
               <div className="w-1/4">{item.currencyCode}</div>
               <div className="w-1/4">{item.conversionRate}</div>
               <div className="w-1/4">{item.country.name}</div>
-              <Button className="w-12" title="From" value={item.id} onClick={(e) => handleClick(e)} color="green" />
+              <Button className="w-12" title="Select" value={item.id} onClick={(e) => handleClick(e)} color="green" />
               <Button className="w-12" title="To" value={item.id} onClick={(e) => handleClickTo(e)} color="green" />
             </div>
           ))}
