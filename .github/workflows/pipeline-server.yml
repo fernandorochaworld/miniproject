@@ -30,3 +30,11 @@ jobs:
 
       - name: Run test
         run: npm run test
+        with:
+          SERVER_PORT: 3001
+          NODE_ENV: test
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
