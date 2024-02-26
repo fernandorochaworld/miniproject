@@ -1,0 +1,29 @@
+name: Pipeline Client
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - production
+      - project-part-5
+
+jobs:
+  pipeline_test_client:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        uses: npm install
+
+      - name: Check Lint
+        uses: npm run lint
+
+      - name: Run test
+        uses: npm run test

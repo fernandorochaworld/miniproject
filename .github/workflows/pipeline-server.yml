@@ -1,0 +1,32 @@
+name: Pipeline Server
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - production
+      - project-part-5
+
+jobs:
+  pipeline_test_server:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ./server
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+
+      - name: Install Dependencies
+        uses: npm install
+
+      - name: Check Lint
+        uses: npm run lint
+
+      - name: Run test
+        uses: npm run test
