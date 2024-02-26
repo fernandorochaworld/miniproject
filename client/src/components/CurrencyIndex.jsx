@@ -46,10 +46,10 @@ const CurrencyIndex = ({ handleSelecteCurrency, handleSelecteCurrencyTo }) => {
 
         <div className="flex flex-wrap mt-10 space-y-1 sm:mx-auto sm:w-full sm:max-w-screen-md">
           <div className="flex flex-row w-full space-x-4" key="header">
-            <div className="w-1/4">Currency Code</div>
-            <div className="w-1/4">Rate</div>
-            <div className="w-1/4">Country</div>
-            <div className="w-24">Options</div>
+            <div className="w-1/4 font-bold">Currency Code</div>
+            <div className="w-1/4 font-bold">Rate</div>
+            <div className="w-1/4 font-bold">Country</div>
+            <div className="w-24 font-bold">Options</div>
           </div>
           {list && list.map(item => (
             <div className="flex flex-row w-full space-x-4" key={item.id}>
