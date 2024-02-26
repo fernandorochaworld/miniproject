@@ -2,9 +2,9 @@
  * Necessary imports, make sure you have these packages installed in your server directory
  */
 const supertest = require('supertest')
-const sequelize = require('...') // Provide a path to your config.js or database.js file, wherever you export that sequelize
+const { sequelize } = require("../config/config"); // Provide a path to your config.js or database.js file, wherever you export that sequelize
 const helper = require('./test_helper')
-const server = require('...') // Provide a path to your server.js file, or wherever you are starting your server and add your endpoints via router
+const server = require('../api') // Provide a path to your server.js file, or wherever you are starting your server and add your endpoints via router
 const api = supertest(server) // Creates a test api that will send requests where we want them to be sent
 
 beforeEach(async () => {
@@ -23,7 +23,7 @@ describe('GET tests', () => {
    * we added the two blogs in the 'beforeEach' setup phase
    */
   test('we have 2 currencies at the start', async () => {
-    const response = await api.get('/api/currencies')
+    const response = await api.get('/api/currency')
     expect(response.body).toHaveLength(2)
   })
 
@@ -41,7 +41,7 @@ describe('GET tests', () => {
 
     // Verify that we get the same currency
     const response = await api
-      .get(`/api/currencies/${getId}`)
+      .get(`/api/currency/${getId}`)
       .expect(200)
 
     // As stated above, we will compare the conversionRate and currencyCode
@@ -61,28 +61,68 @@ describe('GET tests', () => {
 
 describe('POST tests', () => {
   // Add a currency, and verify that a currency is added to our database
-  test('adding a currency', () => {
+  const newCountry = {name: 'Brazil'};
+  const newCurrency = {currencyCode: 'BRL', conversionRate: 3.6};
+  test('adding a currency', async () => {
+    
+    // Verify that we get the same currency
 
+    // ADD Country
+    const responseCountry = await api
+      .post('/api/country')
+      .send(newCountry)
+      .expect(200);
+    console.log('2-body', responseCountry.body);
+    expect(responseCountry.body?.id).toBeDefined();
+
+    // ADD Currency
+    const responseCurrency = await api
+      .post('/api/currency')
+      .send({
+        ...newCurrency,
+        countryId: responseCountry.body?.id
+      })
+      .expect(200);
+      console.log('3-body', responseCurrency.body);
+
+    expect(newCurrency.currencyCode).toEqual(responseCurrency.body.currencyCode)
+    expect(newCurrency.conversionRate).toEqual(responseCurrency.body.conversionRate)
   })
 })
 
 describe('PUT tests', () => {
   // Update a currency, and verify that a currency has been updated
-  test('adding a currency', () => {
+  test('adding a currency', async () => {
+    const updateCurrency = helper.initialCurrencies[1];
+    const id = updateCurrency.id;
+    const newConversionRate = 2.5;
 
+    const response = await api
+      .put(`/api/currency/${id}/${newConversionRate}`)
+      .expect(200);
+    console.log('4-body', response.body);
+      
+
+    expect(response.body.conversionRate).toEqual(newConversionRate)
   })
 })
 
 describe('DELETE tests', () => {
   // Delete a currency, and verify that a currency has been deleted
-  test('adding a currency', () => {
+  test('adding a currency', async () => {
+    const deleteCurrency = helper.initialCurrencies[1];
+    const id = deleteCurrency.id;
+
+    await api
+      .delete(`/api/currency/${id}`)
+      .expect(204);
 
   })
 })
 
 afterAll(async () => {
   // Closes connection after all tests run
-  server.close()
+  // server.close()
   await sequelize.close()
 })
 
