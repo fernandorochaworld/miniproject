@@ -20,7 +20,7 @@ async function removeCountry(countryId) {
     headers: { 'Content-Type': 'application/json' },
   };
   const response = await fetch(`${import.meta.env.VITE_API_URL}/country/${countryId}`, requestOptions);
-  return response.statusText;
+  return response.status;
 }
 
 async function addCurrency(currency) {
@@ -65,7 +65,7 @@ const CurrencyAdd = ({handleReloadIndex}) => {
       } else {
         const status = await removeCountry(country.id);
         alert('Error to save currency: ' + currency?.error);
-        if (status !== 'OK') {
+        if (status !== 204) {
           alert('Error to remove country');
         }
       }
