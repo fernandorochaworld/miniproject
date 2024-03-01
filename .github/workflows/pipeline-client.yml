@@ -5,6 +5,10 @@ on:
     branches:
       - production
       - main
+  pull_request:
+    branches:
+      - production
+      - main
 
 jobs:
   pipeline_test_client:
