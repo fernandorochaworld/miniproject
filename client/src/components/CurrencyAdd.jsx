@@ -14,6 +14,15 @@ async function addCountry(country) {
   return data;
 }
 
+async function removeCountry(countryId) {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/country/${countryId}`, requestOptions);
+  return response.statusText;
+}
+
 async function addCurrency(currency) {
   const requestOptions = {
     method: 'POST',
@@ -54,7 +63,11 @@ const CurrencyAdd = ({handleReloadIndex}) => {
         alert(`New Currency ${currency.currencyCode}.`);
         handleReloadIndex();
       } else {
+        const status = await removeCountry(country.id);
         alert('Error to save currency: ' + currency?.error);
+        if (status !== 'OK') {
+          alert('Error to remove country');
+        }
       }
     } else {
       alert('Error to save country: ' + country?.error);
