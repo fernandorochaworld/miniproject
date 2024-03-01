@@ -1,6 +1,6 @@
 const express = require('express');
 const Currency = require('../models/Currency');
-const { currencyValidation } = require('../utils/validation');
+const { attributesValidation } = require('../utils/validation');
 const router = express.Router();
 
 /**
@@ -61,23 +61,25 @@ router.post('/', async (request, response) => {
   const currency = { currencyCode, conversionRate, countryId };
 
   try {
-    currencyValidation(currency);
+    attributesValidation(currency);
+    
+    currency.conversionRate = parseFloat(currency.conversionRate);
+    if (!currency.conversionRate) {
+      throw new Error('Invalid Conversion Rate.');
+    }
 
     const conflictCode = await Currency.findOne({
       where: {
         currencyCode: currency.currencyCode,
       },
     });
+
+
     // Validate existing currencyCode
     if (conflictCode) {
       throw new Error('currencyCode already exists.');
     }
-  } catch (e) {
-    console.error(JSON.stringify(e));
-    return response.status(400).json({ error: e.message }).end();
-  }
 
-  try {
     const data = await Currency.create(currency);
     return response.status(200).json(data).end();
   } catch (e) {

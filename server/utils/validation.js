@@ -1,9 +1,9 @@
 
   
-function currencyValidation(currency) {
+function attributesValidation(currency) {
   // Validate attributes
   Object.keys(currency).forEach((key) => {
-    if (!(key === 'conversionRate' && currency[key] === 0) && !currency[key]) {
+    if (!currency[key]) {
       throw new Error(`${key} is missing`);
     }
   });
@@ -11,5 +11,5 @@ function currencyValidation(currency) {
 
 
 module.exports = {
-  currencyValidation,
+  attributesValidation,
 };
