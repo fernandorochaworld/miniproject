@@ -3,9 +3,7 @@ name: Pipeline Client
 on:
   push:
     branches:
-      - main
       - production
-      - project-part-5
 
 jobs:
   pipeline_test_client:
