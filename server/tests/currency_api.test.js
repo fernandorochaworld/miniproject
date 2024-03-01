@@ -87,6 +87,29 @@ describe('POST tests', () => {
     expect(newCurrency.currencyCode).toEqual(responseCurrency.body.currencyCode);
     expect(newCurrency.conversionRate).toEqual(responseCurrency.body.conversionRate);
   });
+
+  test('Invalid Rate', async () => {
+
+    // Verify that we get the same currency
+
+    // ADD Country
+    const responseCountry = await api
+      .post('/api/country')
+      .send(newCountry)
+      .expect(200);
+
+    expect(responseCountry.body?.id).toBeDefined();
+
+    // ADD Currency
+    await api
+      .post('/api/currency')
+      .send({
+        ...newCurrency,
+        countryId: responseCountry.body?.id,
+        conversionRate: 'ABC'
+      })
+      .expect(400);
+  });
 });
 
 describe('PUT tests', () => {
