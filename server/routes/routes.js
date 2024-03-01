@@ -11,7 +11,7 @@ const router = express.Router();
  * @responds with the string 'Hello World!'
  */
 router.get('/', (request, response) => {
-  response.send('Hello World!');
+  response.send('Welcome to Currency Converter!');
 });
 
 router.use('/api/currency', currencyRoutes);
